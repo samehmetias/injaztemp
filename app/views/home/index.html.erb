@@ -1,1 +1,107 @@
-<h1 style="text-align: center">Under Construction</h1>
+
+<%=image_tag('banner.png', :style => "width:100%")%>
+
+<div style="padding-top:50px; background-color: #f4f4f2">
+	<center style="font-family:'GillSans'; font-weight:900; font-size:16px; color:#3b3b36">WHO ARE WE?</center>
+	<p class="paragraph">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa </p>
+</div>
+
+<div id="categories" class="row">
+	<div class="col-xs-4 websites selected"><%=image_tag('websites-selected.png', :style => "width:100%")%></div>
+	<div class="col-xs-4 websites" style="display:none"><%=image_tag('websites.png', :style => "width:100%")%></div>
+	<div class="col-xs-4 apps selected" style="display:none"><%=image_tag('apps-selected.png', :style => "width:100%")%></div>
+	<div class="col-xs-4 apps"><%=image_tag('apps.png', :style => "width:100%")%></div>
+	<div class="col-xs-4 quicklet selected" style="display:none"><%=image_tag('quicklet-selected.png', :style => "width:100%")%></div>
+	<div class="col-xs-4 quicklet"><%=image_tag('quicklet.png', :style => "width:100%")%></div>
+</div>
+
+<div id="websites" class="clients" style="padding-top:20px">
+	<a href="http://www.oshtoora.com" target="_blank"><%=image_tag('oshtoora.png', :style => "width:100%")%></a>
+	<a href="http://www.wellspringegypt.com" target="_blank"><%=image_tag('wellspring.png', :style => "width:100%")%></a>
+	<a href="http://www.solacecontrols.com" target="_blank"><%=image_tag('solace.png', :style => "width:100%")%></a>
+</div>
+
+<div id="apps" class="clients" style="padding-top:20px; display:none">
+	<a><%=image_tag('stallions.png', :style => "width:100%")%></a>
+	<a><%=image_tag('red_league.png', :style => "width:100%")%></a>
+	<a><%=image_tag('sandbox.png', :style => "width:100%")%></a>
+	<a><%=image_tag('wsc.png', :style => "width:100%")%></a>
+</div>
+
+<div id="quicklet" style="padding-top:50px; background-color: #f4f4f2; display:none">
+	<center style="font-family:'GillSans'; font-size:16px; color:#71af75; padding:0 5%">NO MORE CASH - WITH QUICLET PAYMENT SYSTEM!</center>
+	<p class="paragraph" style="margin-bottom:0">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa </p>
+	<div class="paragraph row" style="margin:0; padding-top: 10px">
+		<div class="col-xs-3"><%=image_tag('schools.png', :style => "width:100%")%></div>
+		<div class="col-xs-3"><%=image_tag('hotels.png', :style => "width:100%")%></div>
+		<div class="col-xs-3"><%=image_tag('corporate.png', :style => "width:100%")%></div>
+		<div class="col-xs-3"><%=image_tag('events.png', :style => "width:100%")%></div>
+	</div>
+	<center id="quicklet_url" style="padding: 30px 0 60px 0"><a href="http://www.quicklet.cash" target="_blank" style="font-family:'GillSans'; font-size:16px; color:#71af75">WWW.QUICKLET.CASH</a></center>
+</div>
+
+<script>
+	$(".col-xs-4").click(function(){
+		if($(this).hasClass("selected")){
+			
+		}else{
+			$(".col-xs-4").css("display", "none")
+			if($(this).hasClass("websites")){
+				$(".apps, .quicklet").css("display", "inline")
+				$(".selected, #apps, #quicklet").css("display", "none")
+				$(".websites.selected").css("display", "inline")
+				$("#websites").css("display", "block")
+			}else if($(this).hasClass("apps")){
+				$(".websites, .quicklet").css("display", "inline")
+				$(".selected, #websites, #quicklet").css("display", "none")
+				$(".apps.selected").css("display", "inline")
+				$("#apps").css("display", "block")
+			}else{
+				$(".websites, .apps").css("display", "inline")
+				$(".selected, #apps, #websites").css("display", "none")
+				$(".quicklet.selected").css("display", "inline")
+				$("#quicklet").css("display", "block")
+			}
+		}
+	})
+</script>
+
+<style>
+.paragraph{
+	padding: 30px 20% 50px 20%
+}
+#categories{
+	margin:0; 
+	padding: 0 15%
+}
+#categories>div{
+	padding:7%
+}
+.clients>a>img{
+	margin-bottom: 2px
+}
+#websites>a>img:hover{
+	border-right-style: solid;
+	border-left-style: solid;
+	border-width: 2px;
+	border-color: white;
+
+}
+#quicklet>div>div{
+	padding: 0 5%;
+}
+
+@media screen and (max-width: 768px){
+	.paragraph{
+		padding: 30px 5% 50px 5%
+	}
+	#categories{
+		padding: 0 5%
+	}
+	#categories>div{
+		padding:5%
+	}
+}
+
+</style>
+

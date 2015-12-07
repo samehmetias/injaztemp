@@ -11,45 +11,11 @@
   <link rel="shortcut icon" href="<%= image_path 'icon.ico' %>" type="image/ico" />
 </head>
 <body>
-<nav class="navbar navbar-default navbar-fixed-top" style="margin: 0">
-  		<div class="container-fluid phoneMargin">
-    		<!-- Brand and toggle get grouped for better mobile display -->
-    		<div class="navbar-header">
-      			<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-        			<span class="sr-only">Toggle navigation</span>
-        			<span class="icon-bar"></span>
-        			<span class="icon-bar"></span>
-        			<span class="icon-bar"></span>
-      			</button>
-      			<a class="navbar-brand" href="/home"></a>
-    		</div>
-
-    		<!-- Collect the nav links, forms, and other content for toggling -->
-    		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-      			<ul class="nav navbar-nav">
-
-      			</ul>
-      			
-      			<ul class="nav navbar-nav navbar-right">
-        			<% if current_user %> 
-                		<li <%if @list == "my_account"%>class="dropdown active"<%else%>class="dropdown"<%end%>>
-                  			<a href="/my_account" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" onclick="direct('/my_account')"><%= current_user.name %> <span class="caret"></span>
-                  			</a>
-                    		<ul class="dropdown-menu row-fluid" role="menu">
-                      			<li><a href="/my_account">Your Account</a></li>
-                      			<li><%=link_to "Log Out", destroy_user_session_path, method: :delete%></li>
-                    		</ul>
-                		</li>
-       				<% else %>
-       					<!-- <li><%=link_to "Log In", new_user_session_path %></li>
-       					<li><%=link_to "Sign Up", new_user_registration_path%></li> -->
-       				<% end %>
-      			</ul>
-    		</div><!-- /.navbar-collapse -->
-  		</div><!-- /.container-fluid -->
+  <nav class="navbar navbar-default navbar-fixed-top" style="margin: 0; min-height:3px; background-color:black; border-bottom:none">
+  
 	</nav>
   <!-- Body -->
-  <div id="body" style="margin:70px 5%">
+  <div id="body">
     <!-- alert -->
     <div class="container-fluid" style="padding:0">
       <% if flash[:notice] and flash[:notice] != "-1"%>
@@ -71,23 +37,20 @@
         </div>
       <% end %>
     </div>
-    <!-- Progress bar -->
-    <div class="progress" style="display:none; height:8px">
-      <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
-      </div>
-    </div>
     <!-- everything -->
     <div>
       <%= yield %>
     </div>
 
   </div>
-  <!-- footer 
-  <div style="background-color:#888; min-height:150px; margin-top:100px; padding-top:30px; width:100%">
-    <div style="text-align:center">
-      <a href="" style="color:black">Contanct Us</a>
+  <!-- footer -->
+  <div style="margin-top:0">
+    <hr class="soften" style="margin:0; padding:0">
+    <div style="min-height:150px; padding-top:40px; width:100%; text-align:center">
+      <p >Reach out for a free demonstration and consultation</p>
+      <p style="margin-top:10px"><a style="color: #c43f57" href="mailto:sales@applab.co">CONTACT US</a></p>
     </div>
-  </div>-->
+  </div>
 
 </body>
 
