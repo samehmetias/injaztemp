@@ -1,7 +1,7 @@
 module Api
     module V1
         class IosController < BaseController
-            # before_action :get_user
+            before_action :get_user
             skip_before_filter :restrict_access ,:only => [:configurations, :android_update, :login, :create_device, :age_groups, :sign_up, :forgot_password]
 
             # Create the APN Device
@@ -20,7 +20,7 @@ module Api
                         p = Phone.create(:is_android => false, :uuid => params[:device_uuid] , :token => params[:regId])
                     end
                 end
-                render :status=>200, :json=>{:success=>"1", :message=>"Success"}
+                render :status=>200, :json=>{:success=>"1", :message=>"Success", :url => "create_device"}
             end
 
             def get_user
