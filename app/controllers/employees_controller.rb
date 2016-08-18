@@ -1,6 +1,6 @@
 class EmployeesController < ApplicationController
   before_action :set_employee, only: [:show, :edit, :update, :destroy]
-  before_filter :verify_is_admin , except: [:show]
+  #before_filter :verify_is_admin , except: [:show]
 
   # GET /employees
   # GET /employees.json
