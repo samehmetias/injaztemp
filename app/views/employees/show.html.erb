@@ -1,0 +1,97 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @employee.name %>
+</p>
+
+<p>
+  <strong>Employee type:</strong>
+  <%= image_tag @employee.image.url(:thumb) %>
+</p>
+
+<p>
+  <strong>Telephone:</strong>
+  <%= @employee.telephone %>
+</p>
+
+<p>
+  <strong>Email:</strong>
+  <%= @employee.email %>
+</p>
+
+<p>
+  <strong>Work type:</strong>
+  <%= @employee.work_type %>
+</p>
+
+<p>
+  <strong>Area residence:</strong>
+  <%= @employee.area_residence %>
+</p>
+
+<p>
+  <strong>Service area:</strong>
+  <%= @employee.service_area %>
+</p>
+
+<p>
+  <strong>Coordination skills:</strong>
+  <%= @employee.coordination_skills %>
+</p>
+
+<p>
+  <strong>Implementation skills:</strong>
+  <%= @employee.implementation_skills %>
+</p>
+
+<p>
+  <strong>Appraisal grade:</strong>
+  <%= @employee.appraisal_grade %>
+</p>
+
+<p>
+  <strong>Employee type:</strong>
+  <%= @employee.employee_type %>
+</p>
+
+<p>
+  <strong>Company:</strong>
+  <%if @employee.company%>
+    <%= @employee.company.name%>
+  <%end%>
+</p>
+
+
+<% if !@imp.nil? %> 
+<table>
+  <thead>
+    <tr>
+      <th>Classroom</th>
+      <th>Start date</th>
+      <th>Duration</th>
+      <th>Status</th>
+      <th>School</th>
+      <th>Employee</th>
+      <th>Program</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @imp.each do |implementer_request| %>
+      <tr>
+        <td><%= implementer_request.classroom %></td>
+        <td><%= implementer_request.start_date %></td>
+        <td><%= implementer_request.duration %></td>
+        <td><%= implementer_request.status %></td>
+        <td><%= implementer_request.School %></td>
+        <td><%= implementer_request.User %></td>
+        <td><%= implementer_request.Program %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<% end %>
+<%= link_to 'Edit', edit_employee_path(@employee) %> |
+<%= link_to 'Back', employees_path %>

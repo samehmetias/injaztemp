@@ -3,8 +3,64 @@ Rails.application.routes.draw do
   devise_for :users
 
   resources :home
-  
-  root to: "home#index"
+
+  resources :lessons do
+    member do
+      patch :accept
+      patch :refuse
+    end
+  end
+ 
+  resources :implementer_requests do
+    member do
+      patch :accept
+      patch :refuse
+    end
+  end
+
+  resources :employees do
+    collection do
+      post :getCompanyUsers
+    end
+  end
+
+  resources :employees
+  resources :companies
+  resources :programs
+  resources :schools
+
+  root 'employees#show'
+
+  # API Routes
+  namespace :api, defaults: {format: 'json'} do
+    match "base" => "base#index", :via => :post
+    scope module: :v1, constraints: ApiConstraints.new(version: 1) do
+      match '/ios/login' => 'ios#login', :via => :post
+      match '/ios/create_device' => 'ios#create_device', :via => :post
+      match '/ios/android_update' => 'ios#android_update', :via => :post
+      match '/ios/age_groups' => 'ios#age_groups', :via => :post
+      match '/ios/sign_up' => 'ios#sign_up', :via => :post
+      match '/ios/get_past_events' => 'ios#get_past_events', :via => :post
+      match '/ios/get_more_past_events' => 'ios#get_more_past_events', :via => :post
+      match '/ios/get_upcoming_events' => 'ios#get_upcoming_events', :via => :post
+      match '/ios/get_more_upcoming_events' => 'ios#get_more_upcoming_events', :via => :post
+      match '/ios/rsvp' => 'ios#rsvp', :via => :post
+      match '/ios/get_feedbacks' => 'ios#get_feedbacks', :via => :post
+      match '/ios/add_feedback' => 'ios#add_feedback', :via => :post
+      match '/ios/get_event_pictures' => 'ios#get_event_pictures', :via => :post
+      match '/ios/add_event_picture' => 'ios#add_event_picture', :via => :post
+      match '/ios/update_profile' => 'ios#update_profile', :via => :post
+      match '/ios/update_profile_picture' => 'ios#update_profile_picture', :via => :post
+      match '/ios/change_password' => 'ios#change_password', :via => :post
+      match '/ios/forgot_password' => 'ios#forgot_password', :via => :post
+      match '/ios/about_us' => 'ios#about_us', :via => :post
+      match '/ios/contact_us' => 'ios#contact_us', :via => :post
+      match '/ios/get_donations' => 'ios#get_donations', :via => :post
+      match '/ios/approve_picture' => 'ios#approve_picture', :via => :post
+      match '/ios/approve_feedback' => 'ios#approve_feedback', :via => :post
+    end
+    match "*path" , to: "base#catch_404", via: :all
+  end
   
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

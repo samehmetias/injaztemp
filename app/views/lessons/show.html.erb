@@ -1,0 +1,30 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @lesson.name %>
+</p>
+
+<p>
+  <strong>Date:</strong>
+  <%= @lesson.date %>
+</p>
+
+<p>
+  <strong>Status:</strong>
+  <%= @lesson.status %>
+</p>
+
+<p>
+  <strong>Implementer request:</strong>
+  <%= @lesson.implementer_request %>
+</p>
+
+<% if @lesson.status == 'pending' %>
+
+    <%= button_to 'Accept', accept_lesson_path(@lesson), method: :patch, class: 'button success round small' %>
+    <%= button_to 'Reject', refuse_lesson_path(@lesson), method: :patch, class: 'button alert round small' %>
+<% end %>
+
+<%= link_to 'Edit', edit_lesson_path(@lesson) %> |
+<%= link_to 'Back', lessons_path %>

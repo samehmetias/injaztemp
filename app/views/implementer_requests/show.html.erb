@@ -1,0 +1,79 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Classroom:</strong>
+  <%= @implementer_request.classroom %>
+</p>
+
+<p>
+  <strong>Start date:</strong>
+  <%= @implementer_request.start_date %>
+</p>
+
+<p>
+  <strong>Duration:</strong>
+  <%= @implementer_request.duration %>
+</p>
+
+<p>
+  <strong>Status:</strong>
+  <%= @implementer_request.status %>
+</p>
+
+<p>
+  <strong>School:</strong>
+  <%= @implementer_request.School %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @implementer_request.User %>
+</p>
+
+
+<p>
+  <strong>Program:</strong>
+  <%= @implementer_request.Program %>
+</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Classroom</th>
+      <th>Start date</th>
+      <th>Duration</th>
+      <th>Status</th>
+      <th>School</th>
+      <th>Coordinator Name</th>
+      <th>Program</th>
+      <th>Telephon</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @coor_imp.each do |implementer_request| %>
+      <tr>
+        
+        <td><%= implementer_request.classroom %></td>
+        <td><%= implementer_request.start_date %></td>
+        <td><%= implementer_request.duration %></td>
+        <td><%= implementer_request.status %></td>
+        <td><%= implementer_request.School %></td>
+        <td><%= implementer_request.User.name %></td>
+        <td><%= implementer_request.Program %></td>
+        <td><%= implementer_request.User.telephone %></td>
+
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<% if @implementer_request.status == 'pending' %>
+
+    <%= button_to 'Accept', accept_implementer_request_path(@implementer_request), method: :patch %>
+    <%= button_to 'Reject', refuse_implementer_request_path(@implementer_request), method: :patch %>
+<% end %>
+
+<%= link_to 'Edit', edit_implementer_request_path(@implementer_request) %> |
+<%= link_to 'Back', implementer_requests_path %>

@@ -1,0 +1,45 @@
+<p id="notice"><%= notice %></p>
+
+<%= button_to "New Employee", new_employee_path, :class => "btn btn-primary", :style => "float: right; margin-top:10px; margin-bottom: 20px", :method => :get%>
+
+<h1>Listing Employees</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Telephone</th>
+      <th>Email</th>
+      <th>Work type</th>
+      <th>Area residence</th>
+      <th>Service area</th>
+      <th>Coordination skills</th>
+      <th>Implementation skills</th>
+      <th>Appraisal grade</th>
+      <th>Employee type</th>
+      <th>Company</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @employees.each do |employee| %>
+      <tr>
+        <td><%= employee.name %></td>
+        <td><%= employee.telephone %></td>
+        <td><%= employee.email %></td>
+        <td><%= employee.work_type %></td>
+        <td><%= employee.area_residence %></td>
+        <td><%= employee.service_area %></td>
+        <td><%= employee.coordination_skills %></td>
+        <td><%= employee.implementation_skills %></td>
+        <td><%= employee.appraisal_grade %></td>
+        <td><%= employee.employee_type %></td>
+        <td> <%if employee.company%> <%= employee.company.name %> <%end%></td>
+        <td><%= link_to "Show", {:controller => "employees", :action => "show", :id => employee.id }, :method => "get" %></td>
+        <td><%= link_to 'Edit', edit_employee_path(employee) %></td>
+        <td><%= link_to 'Delete', {:controller => "employees", :action => "destroy", :id => employee.id}, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

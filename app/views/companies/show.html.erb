@@ -1,0 +1,23 @@
+<p id="notice"><%= notice %></p>
+
+<%= button_to "Edit", edit_company_path, :class => "btn btn-primary", :style => "float: right; margin-bottom: 20px; margin-right: 10px", :method => :get%>
+
+<h2><%=@company.name%></h2>
+
+<h4 style="margin-top:30px">Employees</h4>
+
+<table class="table table-hover">
+	<tbody>
+		<%User.where(company_id: @company.id).each do |u|%>
+			<tr>
+				<td> <%= link_to u.name, employee_path(u) %> </td>
+        <td>
+          <%= link_to 'Edit', edit_employee_path(u) %>
+          <%= link_to 'Delete', employee_path(u), method: :delete, data: { confirm: 'Are you sure?' }, :style => "color:red" %>
+        </td>
+			</tr>
+		<%end%>
+	</tbody>
+</table>
+
+<%= link_to 'Back', companies_path %>

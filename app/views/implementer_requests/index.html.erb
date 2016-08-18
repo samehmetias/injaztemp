@@ -1,0 +1,40 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Implementer Requests</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Classroom</th>
+      <th>Start date</th>
+      <th>Duration</th>
+      <th>Status</th>
+      <th>School</th>
+      <th>Employee</th>
+      <th>Program</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @implementer_requests.each do |implementer_request| %>
+      <tr>
+        
+        <td><%= implementer_request.classroom %></td>
+        <td><%= implementer_request.start_date %></td>
+        <td><%= implementer_request.duration %></td>
+        <td><%= implementer_request.status %></td>
+        <td><%= implementer_request.School %></td>
+        <td><%= implementer_request.User.email %></td>
+        <td><%= implementer_request.Program %></td>
+        <td><%= link_to 'Show', implementer_request %></td>
+        <td><%= link_to 'Edit', edit_implementer_request_path(implementer_request) %></td>
+        <td><%= link_to 'Delete', implementer_request, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Implementer request', new_implementer_request_path %>

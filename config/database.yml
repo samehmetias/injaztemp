@@ -26,7 +26,7 @@ default: &default
 
 development:
   <<: *default
-  database: app_lab_development
+  database: injaz_development
 
   # The specified database role being used to connect to postgres.
   # To create additional roles in postgres see `$ createuser --help`.
@@ -81,6 +81,6 @@ development:
 #
 production:
   <<: *default
-  database: app_lab_production
-  username: app_lab
+  database: injaz_production
+  username: injaz
   password: <%= ENV['app_lab_DATABASE_PASSWORD'] %>

@@ -38,11 +38,17 @@ gem 'spring',        group: :development
 # Use debugger
 # gem 'debugger', group: [:development, :test]
 
+gem 'apns'
+gem 'gcm'
+
 gem 'devise'
 gem 'simple_form'
 gem 'country_select'
+gem 'json'
 gem 'paperclip'
-gem 'aws-sdk'
+gem 'aws-sdk', '~> 2'
+gem 'tzinfo-data'
+gem 'delayed_job_active_record'
 
 gem 'bootstrap-sass', '~> 3.2.0'
 gem 'autoprefixer-rails'

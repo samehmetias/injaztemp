@@ -1,0 +1,1 @@
+json.array! @implementer_requests, partial: 'implementer_requests/implementer_request', as: :implementer_request

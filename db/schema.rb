@@ -11,125 +11,119 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150303002426) do
+ActiveRecord::Schema.define(version: 20160818183908) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "clients", force: true do |t|
-    t.string   "name"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "events", force: true do |t|
-    t.string   "name"
-    t.date     "event_start_at"
-    t.date     "event_end_at"
-    t.date     "job_start_at"
-    t.date     "job_end_at"
-    t.string   "job_number"
-    t.string   "client_id"
-    t.string   "description"
+  create_table "api_keys", force: true do |t|
+    t.string   "key"
     t.integer  "user_id"
-    t.string   "lead"
-    t.boolean  "quoted",         default: false, null: false
-    t.text     "notes"
-    t.boolean  "deleted",        default: false, null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "job_days", force: true do |t|
-    t.integer  "job_id"
-    t.date     "date"
+  add_index "api_keys", ["key"], name: "index_api_keys_on_key", using: :btree
+
+  create_table "companies", force: true do |t|
+    t.string   "name",       default: "", null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "jobs", force: true do |t|
-    t.integer  "event_id"
-    t.integer  "role_id"
-    t.date     "start_date"
-    t.date     "end_date"
+  create_table "delayed_jobs", force: true do |t|
+    t.integer  "priority",   default: 0, null: false
+    t.integer  "attempts",   default: 0, null: false
+    t.text     "handler",                null: false
+    t.text     "last_error"
+    t.datetime "run_at"
+    t.datetime "locked_at"
+    t.datetime "failed_at"
+    t.string   "locked_by"
+    t.string   "queue"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "languages", force: true do |t|
-    t.string   "name"
+  add_index "delayed_jobs", ["priority", "run_at"], name: "delayed_jobs_priority", using: :btree
+
+  create_table "implementer_requests", force: true do |t|
+    t.string   "classroom",  default: ""
+    t.datetime "start_date"
+    t.integer  "duration",   default: 0
+    t.integer  "school_id",  default: 0,         null: false
+    t.integer  "user_id",    default: 0,         null: false
+    t.integer  "program_id", default: 0,         null: false
+    t.string   "status",     default: "pending"
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
+  end
+
+  create_table "lessons", force: true do |t|
+    t.string   "name",                   default: "",        null: false
+    t.datetime "date"
+    t.integer  "implementer_request_id", default: 0,         null: false
+    t.string   "status",                 default: "pending", null: false
+    t.datetime "created_at",                                 null: false
+    t.datetime "updated_at",                                 null: false
+  end
+
+  create_table "phones", force: true do |t|
+    t.integer  "user_id",    default: 0,     null: false
+    t.string   "token",      default: "",    null: false
+    t.string   "uuid",       default: "",    null: false
+    t.boolean  "is_android", default: false, null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "roles", force: true do |t|
-    t.string   "name"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+  create_table "programs", force: true do |t|
+    t.string   "name",         default: "", null: false
+    t.integer  "duration",     default: 0,  null: false
+    t.string   "participants", default: "", null: false
+    t.string   "overview",     default: "", null: false
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
   end
 
-  create_table "user_events", force: true do |t|
-    t.integer  "user_id"
-    t.integer  "event_id"
-    t.integer  "role_id"
-    t.integer  "rate"
-    t.integer  "number_of_days"
-    t.integer  "rating"
-    t.boolean  "confirmed",      default: false, null: false
-    t.boolean  "denied",         default: false, null: false
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "user_jobs", force: true do |t|
-    t.integer  "user_id"
-    t.integer  "job_id"
-    t.string   "status"
-    t.integer  "rating"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "user_languages", force: true do |t|
-    t.integer  "user_id"
-    t.integer  "language_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "user_roles", force: true do |t|
-    t.integer  "user_id"
-    t.integer  "role_id"
-    t.integer  "rating"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+  create_table "schools", force: true do |t|
+    t.string   "name",         default: "", null: false
+    t.string   "district",     default: "", null: false
+    t.integer  "prep_classes", default: 0,  null: false
+    t.integer  "sec_classes",  default: 0,  null: false
+    t.integer  "uni_classes",  default: 0,  null: false
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
   end
 
   create_table "users", force: true do |t|
-    t.string   "name"
-    t.string   "email",                  default: "",        null: false
-    t.string   "nationality"
-    t.string   "country_of_residence"
-    t.string   "encrypted_password",     default: "",        null: false
-    t.boolean  "is_admin",               default: false,     null: false
-    t.boolean  "is_free_lancer",         default: false,     null: false
-    t.string   "status",                 default: "Invited", null: false
-    t.boolean  "active",                 default: true,      null: false
-    t.string   "phone_number"
-    t.string   "gender"
-    t.integer  "job_count"
-    t.integer  "day_rate"
-    t.integer  "hour_rate"
+    t.string   "name",                   default: "",    null: false
+    t.string   "email",                  default: "",    null: false
+    t.string   "encrypted_password",     default: "",    null: false
+    t.string   "telephone",              default: "",    null: false
+    t.string   "work_type",              default: "",    null: false
+    t.string   "area_residence",         default: "",    null: false
+    t.string   "service_area",           default: "",    null: false
+    t.string   "coordination_skills",    default: "",    null: false
+    t.string   "implementation_skills",  default: "",    null: false
+    t.float    "appraisal_grade",        default: 0.0,   null: false
+    t.string   "employee_type",          default: "",    null: false
+    t.boolean  "admin",                  default: false, null: false
+    t.integer  "company_id",             default: 0,     null: false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",          default: 0,         null: false
+    t.integer  "sign_in_count",          default: 0,     null: false
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
     t.inet     "current_sign_in_ip"
     t.inet     "last_sign_in_ip"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "image_file_name"
+    t.string   "image_content_type"
+    t.integer  "image_file_size"
+    t.datetime "image_updated_at"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree

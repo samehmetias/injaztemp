@@ -1,29 +1,69 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>App Lab</title>
+  <title>Injaz</title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
   <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">  
   <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" >
-  <meta name="application-name" content="App Lab Egypt">
-  <meta name="author" content="App Lab Egypt">
-  <meta name="description" content="App Lab. Web and mobile application development">
-  <meta name="keywords" content="App Lab, Applab, apps, website, development, Egypt">
-  <meta name="robots" content="follow, all" />
-  <meta property="og:site_name" content="applab.co" />  
-  <meta property="og:title" content="App Lab Egypt" />
-  <meta property="og:description" content="Web and mobile application development Egypt" />  
   <link rel="icon" href="<%= image_path 'icon.ico' %>" type="image/ico" />
   <link rel="shortcut icon" href="<%= image_path 'icon.ico' %>" type="image/ico" />
 </head>
 <body>
-  <nav class="navbar navbar-default navbar-fixed-top" style="margin: 0; min-height:3px; background-color:black; border-bottom:none">
-  
-	</nav>
+  <nav class="navbar navbar-default navbar-fixed-top" style="margin: 0">
+    <div class="container-fluid phoneMargin">
+      <!-- Brand and toggle get grouped for better mobile display -->
+      <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="">Injaz</a>
+      </div>
+
+      <!-- Collect the nav links, forms, and other content for toggling -->
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav">
+            <!-- Requests -->
+            <li <%if @list == "requests"%>class="active"<%end%>><a href="/implementer_requests">Requests</a></li>
+              <!-- Programs -->
+            <li <%if @list == "programs"%>class="active"<%end%>><a href="/programs">Programs</a></li>
+              <!-- Sessions -->
+            <li <%if @list == "lessons"%>class="active"<%end%>><a href="/lessons">Sessions</a></li>
+            <%if current_user and current_user.admin%>
+              <!-- schools -->
+              <li <%if @list == "schools"%>class="active"<%end%>><a href="/schools">Schools</a></li>
+              <!-- employees -->
+              <li <%if @list == "employees"%>class="active"<%end%>><a href="/employees">Employees</a></li>
+              <!-- companies -->
+              <li <%if @list == "companies"%>class="active"<%end%>><a href="/companies">Companies</a></li>
+            <%end%>
+          </ul>
+          
+          <ul class="nav navbar-nav navbar-right">
+            <% if current_user %> 
+                  <li <%if @list == "my_account"%>class="dropdown active"<%else%>class="dropdown"<%end%>>
+                      <a href="/my_account" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" onclick="direct('/my_account')"><%= current_user.name %> <span class="caret"></span>
+                      </a>
+                      <ul class="dropdown-menu row-fluid" role="menu">
+                          <li><a href="/my_account">Your Account</a></li>
+                          <li><%=link_to "Log Out", destroy_user_session_path, method: :delete%></li>
+                      </ul>
+                  </li>
+            <% else %>
+              <li><%=link_to "Log In", new_user_session_path %></li>
+              <li><%=link_to "Sign Up", new_user_registration_path%></li>
+            <% end %>
+          </ul>
+      </div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
+ </nav>
+
   <!-- Body -->
-  <div id="body">
+  <div id="body" style="margin:70px 5%">
     <!-- alert -->
     <div class="container-fluid" style="padding:0">
       <% if flash[:notice] and flash[:notice] != "-1"%>
@@ -45,20 +85,19 @@
         </div>
       <% end %>
     </div>
+    <!-- Progress bar -->
+    <div class="progress" style="display:none; height:8px">
+      <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
+      </div>
+    </div>
     <!-- everything -->
     <div>
       <%= yield %>
     </div>
 
   </div>
-  <!-- footer -->
-  <div style="margin-top:0; background-color:#323232">
-    <hr class="soften" style="margin:0; padding:0">
-    <div style="min-height:180px; padding-top:50px; width:100%; text-align:center">
-      <p style="color:#c43f57; font-family:'GillSans'; font-size:16px">REACH OUT FOR A DEMONSTRATION OR CONSULTATION</p>
-      <p style="margin-top:10px"><a style="color: white; font-family:'GillSans'" href="mailto:sales@applab.co">CONTACT US</a></p>
-    </div>
-  </div>
+
+ 
 
 </body>
 
@@ -66,7 +105,7 @@
 </html>
 
 <script>
-var vph = $(window).height() - 330;
+var vph = $(window).height() - 300;
 $("#body").css({"min-height": vph + 'px'});
 
 function direct(url){
