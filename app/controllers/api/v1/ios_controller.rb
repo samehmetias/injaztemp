@@ -28,6 +28,9 @@ module Api
                 else
                     @@current_user = ""
                 end
+                puts "=============================="
+                puts @@current_user
+                puts "=============================="
             end
 
             def android_update
