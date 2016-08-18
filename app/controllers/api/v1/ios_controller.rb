@@ -6,6 +6,9 @@ module Api
 
             # Create the APN Device
             def create_device
+                puts "=============================="
+                puts "Device"
+                puts "=============================="
                 phone = Phone.where('uuid=?', params[:device_uuid]).first
                 if phone
                     phone.token = params[:regId]
