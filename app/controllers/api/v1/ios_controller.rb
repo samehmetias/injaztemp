@@ -21,6 +21,9 @@ module Api
             end
 
             def get_user
+                puts "=============================="
+                puts "Getting User!!"
+                puts "=============================="
                 token = request.headers["HTTP_AUTHORIZATION"].gsub(/Token realm=/,'').gsub(/Token token=/,'').gsub('"','') if request.headers["HTTP_AUTHORIZATION"]
                 if request.headers["HTTP_AUTHORIZATION"] and token
                     api_key = ApiKey.find_by_key(token)
