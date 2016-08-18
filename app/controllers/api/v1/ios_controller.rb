@@ -1,7 +1,7 @@
 module Api
     module V1
         class IosController < BaseController
-            before_action :get_user
+            # before_action :get_user
             skip_before_filter :restrict_access ,:only => [:configurations, :android_update, :login, :create_device, :age_groups, :sign_up, :forgot_password]
 
             # Create the APN Device
