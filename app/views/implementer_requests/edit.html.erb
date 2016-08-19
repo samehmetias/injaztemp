@@ -1,6 +1,101 @@
 <h1>Editing Implementer Request</h1>
 
-<%= render 'form' %>
+<%= form_for @implementer_request, html:{ multipart: true }, url: implementer_request_path(@implementer_request) do |f| %>
+  <% if @implementer_request.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@implementer_request.errors.count, "error") %> prohibited this implementer_request from being saved:</h2>
+
+      <ul>
+      <% @implementer_request.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :classroom %><br>
+    <%= f.text_field :classroom %>
+  </div>
+
+  <div class="field">
+    <%= f.label :start_date %><br>
+    <%= f.datetime_select :start_date %>
+  </div> 
+
+  <div class="field">
+    <%= f.label :duration %><br>
+    <%= f.number_field :duration %>
+  </div>
+
+  <div class="field">
+    <%= f.label :status %><br>
+    <%= f.text_field :status %>
+  </div>
+
+<div class="field">
+   <%= f.label :school_id %><br>
+  <select class="form-control" style="margin-bottom:15px" id="select_school" name="implementer_request[school_id]" required="required">
+    <option value="">Select School</option>
+    <%= School.all.each do |s| %>
+      <option value="<%=s.id%>"><%=s.name%></option>
+    <%end%>
+  </select>
+  </div>
+
+
+  <label>Companies</label>
+  <select class="form-control" style="margin-bottom:15px" id="select_company" required="required">
+    <option value="">Select Company</option>
+    <%= Company.all.each do |c| %>
+      <option value="<%=c.id%>"><%=c.name%></option>
+    <%end%>
+  </select>
+
+  <div class="field">
+    <%= f.label :user_id %><br>
+    <select class="form-control" style="margin-bottom:15px" id="select_user" name="implementer_request[user_id]" required="required">
+    <option value="">Select User</option>
+  </select>
+  </div>
+
+<div class="field">
+    <%= f.label :program_id %><br>
+  <select class="form-control" style="margin-bottom:15px" name="implementer_request[program_id]" required="required">
+    <option value="">Select Program</option>
+    <%= Program.all.each do |p| %>
+      <option value="<%=p.id%>"><%=p.name%></option>
+    <%end%>
+  </select>
+</div>  
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
+
+<script>
+  $('#select_company').on('change', function() {
+  var c = $("#select_company").val()
+  if (c != "") {
+    $.post( "/employees/getCompanyUsers", { company_id: c })
+      .done(function( data ) {
+        if (data != "Success") {
+          $('#select_user option:not(:first)').remove().end();
+          for (var i = 0; i < data.length; i++) {
+              $('#select_user').append($('<option>', {
+                value: data[i]["id"],
+                text: data[i]["name"]
+            }));
+          }
+        }
+      });
+  }
+  else {
+    $('#select_user option:not(:first)').remove().end();
+  }
+});
+</script>
 
 <%= link_to 'Show', @implementer_request %> |
 <%= link_to 'Back', implementer_requests_path %>
