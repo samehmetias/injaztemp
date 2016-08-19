@@ -22,18 +22,18 @@
 
 <p>
   <strong>School:</strong>
-  <%= @implementer_request.School %>
+  <%= @implementer_request.school.name %>
 </p>
 
 <p>
   <strong>User:</strong>
-  <%= @implementer_request.User %>
+  <%= @implementer_request.user.name %>
 </p>
 
 
 <p>
   <strong>Program:</strong>
-  <%= @implementer_request.Program %>
+  <%= @implementer_request.program.name %>
 </p>
 
 <table>
@@ -59,10 +59,10 @@
         <td><%= implementer_request.start_date %></td>
         <td><%= implementer_request.duration %></td>
         <td><%= implementer_request.status %></td>
-        <td><%= implementer_request.School %></td>
-        <td><%= implementer_request.User.name %></td>
-        <td><%= implementer_request.Program %></td>
-        <td><%= implementer_request.User.telephone %></td>
+        <td><%= implementer_request.school.name %></td>
+        <td><%= implementer_request.user.name %></td>
+        <td><%= implementer_request.program.name %></td>
+        <td><%= implementer_request.user.telephone %></td>
 
       </tr>
     <% end %>

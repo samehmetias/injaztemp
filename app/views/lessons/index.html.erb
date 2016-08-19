@@ -1,8 +1,9 @@
 <p id="notice"><%= notice %></p>
 
+<%= button_to "New Session", new_lesson_path, :class => "btn btn-primary", :style => "float: right; margin-top:10px; margin-bottom: 20px", :method => :get%>
 <h1>Listing Lessons</h1>
 
-<table>
+<table class="table table-hover">
   <thead>
     <tr>
       <th>User's name</th>
@@ -16,20 +17,17 @@
 
   <tbody>
     <% @lessons.each do |lesson| %>
-      <tr>
-        <td><%= lesson.implementer_request.User.name %></td>
-        <td><%= lesson.implementer_request.Program.name %></td>
+        <td><%= lesson.implementer_request.user.name %></td>
+        <td><%= lesson.implementer_request.program.name %></td>
         <td><%= lesson.name %></td>
         <td><%= lesson.date %></td>
         <td><%= lesson.status %></td>
         <td><%= link_to 'Show', lesson %></td>
         <td><%= link_to 'Edit', edit_lesson_path(lesson) %></td>
-        <td><%= link_to 'Delete', lesson, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Delete', lesson, :style => "color:red" ,method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
 
 <br>
-
-<%= link_to 'New Lesson', new_lesson_path %>

@@ -1,8 +1,9 @@
 <p id="notice"><%= notice %></p>
 
+<%= button_to "New Program", new_program_path, :class => "btn btn-primary", :style => "float: right; margin-top:10px; margin-bottom: 20px", :method => :get%>
 <h1>Listing Programs</h1>
 
-<table>
+<table class="table table-hover">
   <thead>
     <tr>
       <th>Name</th>
@@ -22,7 +23,7 @@
         <td><%= program.overview %></td>
         <td><%= link_to 'Show', program %></td>
         <td><%= link_to 'Edit', edit_program_path(program) %></td>
-        <td><%= link_to 'Delete', program, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Delete', program,  :style => "color:red", method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
@@ -30,4 +31,3 @@
 
 <br>
 
-<%= link_to 'New Program', new_program_path %>

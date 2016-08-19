@@ -1,8 +1,9 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Listing Implementer Requests</h1>
+<%= button_to "New Request", new_implementer_request_path, :class => "btn btn-primary", :style => "float: right; margin-top:10px; margin-bottom: 20px", :method => :get%>
+<h1>Listing Requests</h1>
 
-<table>
+<table class="table table-hover">
   <thead>
     <tr>
       <th>Classroom</th>
@@ -24,12 +25,12 @@
         <td><%= implementer_request.start_date %></td>
         <td><%= implementer_request.duration %></td>
         <td><%= implementer_request.status %></td>
-        <td><%= implementer_request.School %></td>
-        <td><%= implementer_request.User.email %></td>
-        <td><%= implementer_request.Program %></td>
+        <td><%= implementer_request.school.name %></td>
+        <td><%= implementer_request.user.name %></td>
+        <td><%= implementer_request.program.name %></td>
         <td><%= link_to 'Show', implementer_request %></td>
         <td><%= link_to 'Edit', edit_implementer_request_path(implementer_request) %></td>
-        <td><%= link_to 'Delete', implementer_request, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Delete', implementer_request, :style => "color:red" ,method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
@@ -37,4 +38,3 @@
 
 <br>
 
-<%= link_to 'New Implementer request', new_implementer_request_path %>

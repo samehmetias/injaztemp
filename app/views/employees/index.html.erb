@@ -5,7 +5,7 @@
 <%= button_to "Notify", notifyUser_employees_path, :class => "btn btn-primary", :style => "float: right; margin-top:10px; margin-bottom: 20px", :method => :post%>
 <h1>Listing Employees</h1>
 
-<table>
+<table class="table table-hover">
   <thead>
     <tr>
       <th>Name</th>
@@ -39,7 +39,7 @@
         <td> <%if employee.company%> <%= employee.company.name %> <%end%></td>
         <td><%= link_to "Show", {:controller => "employees", :action => "show", :id => employee.id }, :method => "get" %></td>
         <td><%= link_to 'Edit', edit_employee_path(employee) %></td>
-        <td><%= link_to 'Delete', {:controller => "employees", :action => "destroy", :id => employee.id}, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Delete', {:controller => "employees", :action => "destroy", :id => employee.id}, :style => "color:red", method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>

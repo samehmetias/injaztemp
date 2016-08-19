@@ -8,29 +8,30 @@ class ImplementerRequestsController < ApplicationController
     if  current_user.admin?
       @implementer_requests = ImplementerRequest.all
     else
-      @implementer_requests = current_user.Implementer_requests
+      @implementer_requests = current_user.implementer_requests
     end
   end
 
   # GET /implementer_requests/1
   # GET /implementer_requests/1.json
   def show
-    s = @implementer_request.School
-    p = @implementer_request.Program
+    s = @implementer_request.school
+    p = @implementer_request.program
     d = @implementer_request.start_date
-    # @coor_imp = ImplementerRequest.where(School: s, Program: p, start_date: d)
+
+    #@coor_imp = ImplementerRequest.where(school_id = s.id)
     # @e = User.joins(@coor_imp).where()
     
-    @coor_imp = ImplementerRequest.includes(:User).where(School: s, Program: p, start_date: d,:employees => {employee_type: 'Coordinator' } ).all
-    
-    @coor_imp.each do |company|
-     puts company.User.name
-    end
+   @coor_imp = ImplementerRequest.includes(:user).where(school: s, program: p, start_date: d,:users => {employee_type: 'Coordinator' } ).all
+   # @coor_imp = ImplementerRequest.where('School = ? and Program = ? and start_data = ?', s,p,d)
+    # @coor_imp.each do |company|
+    #  puts company.User.name
+    # end
   end
 
   # GET /implementer_requests/new
   def new
-    @implementer_request = ImplementerRequest.new
+     @implementer_request = ImplementerRequest.new
   end
 
   # GET /implementer_requests/1/edit
