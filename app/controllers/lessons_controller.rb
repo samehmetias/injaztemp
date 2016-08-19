@@ -8,7 +8,7 @@ class LessonsController < ApplicationController
     if  current_user.admin?
       @lessons = Lesson.all
     else
-      @lessons = current_user.Lessons
+      @lessons = current_user.lessons
     end
   end
 

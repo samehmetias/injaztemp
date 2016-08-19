@@ -8,7 +8,7 @@ class ProgramsController < ApplicationController
     if  current_user.admin?
       @programs = Program.all
     else
-      @programs = current_user.Programs
+      @programs = current_user.programs
     end
   end
 
