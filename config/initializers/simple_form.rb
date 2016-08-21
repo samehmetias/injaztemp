@@ -90,8 +90,7 @@ SimpleForm.setup do |config|
   # config.collection_wrapper_class = nil
 
   # You can wrap each item in a collection of radio/check boxes with a tag,
-  # defaulting to :span. Please note that when using :boolean_style = :nested,
-  # SimpleForm will force this option to be a label.
+  # defaulting to :span.
   # config.item_wrapper_tag = :span
 
   # You can define a class to use in all item wrappers. Defaulting to none.
@@ -118,7 +117,7 @@ SimpleForm.setup do |config|
   # in this configuration, which is recommended due to some quirks from different browsers.
   # To stop SimpleForm from generating the novalidate option, enabling the HTML5 validations,
   # change this configuration to true.
-  config.browser_validations = true
+  config.browser_validations = false
 
   # Collection of methods to detect if a file type was given.
   # config.file_methods = [ :mounted_as, :file?, :public_filename ]
@@ -163,16 +162,4 @@ SimpleForm.setup do |config|
 
   # Defines which i18n scope will be used in Simple Form.
   # config.i18n_scope = 'simple_form'
-
-  config.wrappers :horizontal_select_date, tag: 'div', class: 'form-group', error_class: 'has-error' do |b|
-    b.use :html5
-    b.optional :readonly
-    b.use :label, class: 'control-label'
-    b.wrapper tag: 'div', class: 'form-inline' do |ba|
-      ba.use :input, class: 'form-control'
-      ba.use :error, wrap_with: { tag: 'span', class: 'help-block' }
-      ba.use :hint,  wrap_with: { tag: 'p', class: 'help-block' }
-    end
-  end
-
 end

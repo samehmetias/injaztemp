@@ -41,6 +41,7 @@ gem 'spring',        group: :development
 gem 'apns'
 gem 'gcm'
 
+gem 'simple_form'
 gem 'devise'
 gem 'simple_form'
 gem 'country_select'

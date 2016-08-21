@@ -43,16 +43,18 @@ class EmployeesController < ApplicationController
   # PATCH/PUT /employees/1
   # PATCH/PUT /employees/1.json
   def update
-    # respond_to do |format|
+    #respond_to do |format|
       if @employee.update(employee_params)
         # format.html { redirect_to employee_path(@employee), notice: 'User was successfully updated.' }
         # format.json { render :show, status: :ok, location: @employee }
         redirect_to employee_path(@employee), notice: 'User was successfully updated.'
       else
-        format.html { render :edit }
-        format.json { render json: @employee.errors, status: :unprocessable_entity }
+        #format.html { render :edit }
+        #format.json { render json: @employee.errors, status: :unprocessable_entity }
+        redirect_to employee_path(@employee), notice: 'User was not updated.'
+
       end
-    # end
+    #end
   end
 
   # DELETE /employees/1
@@ -74,7 +76,8 @@ class EmployeesController < ApplicationController
       group['name'] = u.name
       users_array.push(group)
     end
-    
+    puts '+++++++++++++++++++++++'
+    puts users_array.inspect
     return render :json => users_array.to_json  
   end
 

@@ -1,80 +1,21 @@
 <h1>New Employee</h1>
 
-<%= form_for @employee, html:{ multipart: true }, :url => url_for(:action => 'create', :controller => 'employees'),
-    :method => 'post' do |f| %>
-  <% if @employee.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@employee.errors.count, "error") %> prohibited this employee from being saved:</h2>
 
-      <ul>
-      <% @employee.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
+<%= simple_form_for @employee, :url => url_for(:action => 'create', :controller => 'employees') do |f| %>
+  <%= f.input :name %>
+  <%= f.input :image, :as => :file %>
+  <%= f.input :telephone %>
+  <%= f.input :email %>
+  <%= f.input :password %>
+  <%= f.input :work_type %>
+  <%= f.input :service_area %>
+  <%= f.input :coordination_skills %>
+  <%= f.input :implementation_skills %>
+  <%= f.input :appraisal_grade %>
+  <%= f.input :employee_type %>
+  <%= f.association :company %>
 
-  <div class="field">
-    <%= f.label :name %><br>
-    <%= f.text_field :name, required: true %>
-  </div>
-    <div class="field">
-    <%= f.label :image %><br>
-    <%= f.file_field :name %>
-  </div>
-  <div class="field">
-    <%= f.label :telephone %><br>
-    <%= f.number_field :telephone %>
-  </div>
-  <div class="field">
-    <%= f.label :email %><br>
-    <%= f.text_field :email %>
-  </div>
-    <div class="field">
-    <%= f.label :password %>
-    <%= f.password_field :password, autocomplete: "off" %>
-  </div>
-  <div class="field">
-    <%= f.label :work_type %><br>
-    <%= f.text_field :work_type %>
-  </div>
-  <div class="field">
-    <%= f.label :area_residence %><br>
-    <%= f.text_field :area_residence %>
-  </div>
-  <div class="field">
-    <%= f.label :service_area %><br>
-    <%= f.text_field :service_area %>
-  </div>
-  <div class="field">
-    <%= f.label :coordination_skills %><br>
-    <%= f.text_field :coordination_skills %>
-  </div>
-  <div class="field">
-    <%= f.label :implementation_skills %><br>
-    <%= f.text_field :implementation_skills %>
-  </div>
-  <div class="field">
-    <%= f.label :appraisal_grade %><br>
-    <%= f.text_field :appraisal_grade %>
-  </div>
-  <div class="field">
-    <%= f.label :employee_type %><br>
-    <%= f.text_field :employee_type %>
-  </div>
-  <div class="field">
-    <%= f.label :company_id %><br>
-    <select class="form-control" style="margin-bottom:15px" name="user[company_id]" required="required">
-      <option value="">Select Company</option>
-      <%= Company.all.each do |c| %>
-        <option value="<%=c.id%>"><%=c.name%></option>
-      <%end%>
-    </select>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+  <%= f.button :submit %>
 <% end %>
-
 
 <%= link_to 'Back', employees_path %>

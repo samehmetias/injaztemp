@@ -3,7 +3,7 @@ class ImplementerRequest < ActiveRecord::Base
   belongs_to :program
   belongs_to :user
   
-  has_many :lessons, :dependent => :delete_all
+  has_many :lessons, dependent: :destroy
   
   scope :accepted, -> { where(status: 'YES') }		
   scope :pending, -> { where(status: 'pending') }		

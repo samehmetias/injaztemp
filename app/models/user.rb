@@ -15,11 +15,11 @@ class User < ActiveRecord::Base
 
   belongs_to :company
 
-  has_many :implementer_requests
+  has_many :implementer_requests, dependent: :destroy
 
 
   has_many :programs, through: :implementer_requests
-  has_many :lessons, through: :implementer_requests
+  has_many :lessons, through: :implementer_requests, dependent: :destroy
 
   has_one :api_key, dependent: :destroy
 
