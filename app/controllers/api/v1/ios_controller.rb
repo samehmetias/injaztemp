@@ -89,7 +89,7 @@ module Api
                 end
 
                 lessonsArray = []
-                lessons = Lesson.where(user_id: @@current_user.id)
+                lessons = @@current_user.lessons
                 lessons.each do |r|
                     e = {}
                     e['lesson_id'] = r.id.to_s
