@@ -34,6 +34,9 @@ module Api
                 else
                     @@current_user = ""
                 end
+                puts "============TOKEN=================="
+                puts token.inspect
+                puts "=============================="
                 puts "=============================="
                 puts @@current_user
                 puts "=============================="
@@ -89,7 +92,7 @@ module Api
                 end
 
                 lessonsArray = []
-                lessons = @@current_user.lessonsArray
+                lessons = @@current_user.lessons
                 lessons.each do |r|
                     e = {}
                     e['lesson_id'] = r.id.to_s
