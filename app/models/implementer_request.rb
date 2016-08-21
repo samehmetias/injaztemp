@@ -29,4 +29,19 @@ class ImplementerRequest < ActiveRecord::Base
     self.status = 'NO'
     self.save
   end
+
+  def getCoordinators
+    s = self.school
+    p = self.program
+    d = self.start_date
+
+    #@coor_imp = ImplementerRequest.where(school_id = s.id)
+    # @e = User.joins(@coor_imp).where()
+    
+   coor_imp = ImplementerRequest.includes(:user).where(school: s, program: p, start_date: d,:users => {employee_type: 'Coordinator' } ).all
+   # @coor_imp = ImplementerRequest.where('School = ? and Program = ? and start_data = ?', s,p,d)
+    # @coor_imp.each do |company|
+    #  puts company.User.name
+    # end
+  end
 end

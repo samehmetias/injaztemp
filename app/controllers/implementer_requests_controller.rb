@@ -91,7 +91,7 @@ class ImplementerRequestsController < ApplicationController
     redirect_to implementer_requests_path
   end
   
-    def refuse
+  def refuse
     @imp = set_implementer_request
     @imp.refuse
     redirect_to implementer_requests_path

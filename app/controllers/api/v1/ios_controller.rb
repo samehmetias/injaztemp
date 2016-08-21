@@ -66,7 +66,45 @@ module Api
                 @@current_user.ensure_authentication_token!
                 userToken = @@current_user.api_key.key.to_s
 
-                render :status=>200, :json=>{:success=>"1", :message=>"Success", :url=>"login", :user=>{id: @@current_user.id.to_s, name: @@current_user.name}, :token=>userToken}
+                requestsArray = []
+                requests = ImplementerRequest.where(user_id: @@current_user.id)
+                requests.each do |r|
+                    e = {}
+                    e['request_id'] = r.id.to_s
+                    e['request_school_name'] = r.school.name
+                    e['request_school_location'] = r.school.district
+                    e['request_program'] = r.program.name
+                    e['request_start_date'] = r.start_date.strftime('%d.%m.%y at %I:%M %p')
+                    e['request_duration'] = r.program.duration.to_s
+                    e['request_classroom'] = r.classroom.to_s
+                    e['request_status'] = r.status
+                    coords_requests = r.getCoordinators
+                    i = 0
+                    while i < coords_requests.count do
+                      e['request_coord_name'+i] = coords_requests[i].user.name
+                      e['request_coord_telephone'+i] = coords_requests[i].user.telephone.to_s
+                      @i = @i+1
+                    end
+                    requestsArray.push(e)
+                end
+
+                lessonsArray = []
+                lessons = Lesson.where(user_id: @@current_user.id)
+                lessons.each do |r|
+                    e = {}
+                    e['lesson_id'] = r.id.to_s
+                    e['lesson_name'] = r.name
+                    e['lesson_school_name'] = r.school.name
+                    e['lesson_program_name'] = r.implementer_request.program.name
+                    e['lesson_date'] = r.date.strftime('%d.%m.%y at %I:%M %p')
+                    e['lesson_classroom'] = l.classroom.to_s
+                    e['lesson_status'] = r.status
+
+                    lessonsArray.push(e)
+                end
+
+                render :status=>200, :json=>{:success=>"1", :message=>"Success", :url=>"login", :user=>{id: @@current_user.id.to_s, name: @@current_user.name, company_name: @@current_user.company.name, telephone: @@current_user.telephone.to_s}, :token=>userToken, :requests => requestsArray, :lessons => lessonsArray}
+
             end
 
             def age_groups
