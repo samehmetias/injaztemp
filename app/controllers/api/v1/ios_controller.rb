@@ -81,8 +81,8 @@ module Api
                     coords_requests = r.getCoordinators
                     i = 0
                     while i < coords_requests.count do
-                      e['request_coord_name'+i] = coords_requests[i].user.name
-                      e['request_coord_telephone'+i] = coords_requests[i].user.telephone.to_s
+                      e['request_coord_name'+i.to_s] = coords_requests[i].user.name
+                      e['request_coord_telephone'+i.to_s] = coords_requests[i].user.telephone.to_s
                       @i = @i+1
                     end
                     requestsArray.push(e)
