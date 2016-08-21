@@ -1,7 +1,7 @@
 
 <%= simple_form_for @implementer_request, :url => url_for(:action => 'create', :controller => 'implementer_requests'),:method => 'post' do |f| %>
   <%= f.association :program, :include_blank => 'Select Program'%>
-  <%= f.input :start_date, wrapper: :horizontal_select_date %>
+  <%= f.input :start_date%>
   <label>Company</label>
   <select class="form-control" style="margin-bottom:15px" id="select_company" required="required">
     <option value="">Select Company</option>
