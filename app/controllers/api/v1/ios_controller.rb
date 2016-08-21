@@ -83,7 +83,7 @@ module Api
                     while i < coords_requests.count do
                       e['request_coord_name'+i.to_s] = coords_requests[i].user.name
                       e['request_coord_telephone'+i.to_s] = coords_requests[i].user.telephone.to_s
-                      @i = @i+1
+                      i = i+1
                     end
                     requestsArray.push(e)
                 end
