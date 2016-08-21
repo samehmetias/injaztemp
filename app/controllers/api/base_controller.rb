@@ -1,6 +1,6 @@
 module Api
   class BaseController < ApplicationController
-    skip_before_filter :authenticate_user!
+    #skip_before_filter :authenticate_user!
 
     $api_datetime_format = "%d %b, %Y %I:%M:%S %p"
     $api_date_format = "%Y-%m-%d"
