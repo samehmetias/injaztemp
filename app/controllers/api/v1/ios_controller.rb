@@ -97,7 +97,7 @@ module Api
                     e = {}
                     e['lesson_id'] = r.id.to_s
                     e['lesson_name'] = r.name
-                    e['lesson_school_name'] = r.school.name
+                    e['lesson_school_name'] = r.implementer_request.school.name
                     e['lesson_program_name'] = r.implementer_request.program.name
                     e['lesson_date'] = r.date.strftime('%d.%m.%y at %I:%M %p')
                     e['lesson_classroom'] = l.classroom.to_s
