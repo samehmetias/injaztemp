@@ -8,7 +8,7 @@ module Api
     protect_from_forgery with: :null_session
     respond_to :json
     # check request format and access restrictions
-    before_filter :restrict_access
+    #before_filter :restrict_access
     # Remove Can't verify CSRF token authenticity warning
     skip_before_filter  :verify_authenticity_token
 
