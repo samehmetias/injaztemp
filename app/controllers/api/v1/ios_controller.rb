@@ -2,7 +2,7 @@ module Api
     module V1
         class IosController < BaseController
             before_action :get_user
-            skip_before_filter :restrict_access ,:only => [:configurations, :android_update, :login, :create_device, :age_groups, :sign_up, :forgot_password]
+            skip_before_filter :restrict_access ,:only => [:configurations, :android_update, :login, :create_device, :age_groups, :sign_up, :forgot_password,:get_all_requests]
 
             # Create the APN Device
             def create_device
@@ -121,6 +121,33 @@ module Api
 
                 render :status=>200, :json=>{:success=>"1", :message=>"Success", :url=>"login", :user=>{id: @@current_user.id.to_s, name: @@current_user.name, company_name: @@current_user.company.name, telephone: @@current_user.telephone.to_s}, :token=>userToken, :requests => requestsArray, :lessons => lessonsArray, :programs => programsArray}
 
+            end
+
+            def get_all_requests
+                requestsArray = []
+                # requests = ImplementerRequest.where(user_id: @@current_user.id)
+                requests = ImplementerRequest.all
+                requests.each do |r|
+                    e = {}
+                    e['request_id'] = r.id.to_s
+                    e['request_school_name'] = r.school.name
+                    e['request_school_location'] = r.school.district
+                    e['request_program'] = r.program.name
+                    e['request_start_date'] = r.start_date.strftime('%d.%m.%y at %I:%M %p')
+                    e['request_duration'] = r.program.duration.to_s
+                    e['request_classroom'] = r.classroom.to_s
+                    e['request_status'] = r.status
+                    coords_requests = r.getCoordinators
+                    i = 0
+                    while i < coords_requests.count do
+                      e['request_coord_name'+i.to_s] = coords_requests[i].user.name
+                      e['request_coord_telephone'+i.to_s] = coords_requests[i].user.telephone.to_s
+                      i = i+1
+                    end
+                    requestsArray.push(e)
+                end
+                render :status=>200, :json=>{:success=>"1", :message=>"Success", :url=>"get_all_requests", :requests => requestsArray}
+                
             end
 
             def age_groups
