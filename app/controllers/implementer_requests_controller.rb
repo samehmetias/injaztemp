@@ -1,5 +1,6 @@
 class ImplementerRequestsController < ApplicationController
   before_action :set_implementer_request, only: [:show, :edit, :update, :destroy]
+  before_filter :authenticate_user!
   before_filter :verify_is_admin , only: [:destroy]
 
   # GET /implementer_requests

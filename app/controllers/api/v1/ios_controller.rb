@@ -106,7 +106,20 @@ module Api
                     lessonsArray.push(e)
                 end
 
-                render :status=>200, :json=>{:success=>"1", :message=>"Success", :url=>"login", :user=>{id: @@current_user.id.to_s, name: @@current_user.name, company_name: @@current_user.company.name, telephone: @@current_user.telephone.to_s}, :token=>userToken, :requests => requestsArray, :lessons => lessonsArray}
+                programsArray = []
+                programs = @@current_user.programs
+                programs.each do |r|
+                    e = {}
+                    e['program_id'] = r.id.to_s
+                    e['program_name'] = r.name
+                    e['program_duration'] = r.duration.to_s
+                    e['program_participants'] = r.participants
+                    e['program_overview'] = r.overview
+
+                    programsArray.push(e)
+                end
+
+                render :status=>200, :json=>{:success=>"1", :message=>"Success", :url=>"login", :user=>{id: @@current_user.id.to_s, name: @@current_user.name, company_name: @@current_user.company.name, telephone: @@current_user.telephone.to_s}, :token=>userToken, :requests => requestsArray, :lessons => lessonsArray, :programs => programsArray}
 
             end
 
