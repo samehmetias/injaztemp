@@ -125,8 +125,8 @@ module Api
 
             def get_all_requests
                 requestsArray = []
-                requests = ImplementerRequest.where(user_id: @@current_user.id)
-                # requests = ImplementerRequest.all
+                # requests = ImplementerRequest.where(user_id: @@current_user.id)
+                requests = ImplementerRequest.all
                 requests.each do |r|
                     e = {}
                     e['request_id'] = r.id.to_s
