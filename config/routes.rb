@@ -61,6 +61,7 @@ Rails.application.routes.draw do
       match '/ios/approve_picture' => 'ios#approve_picture', :via => :post
       match '/ios/approve_feedback' => 'ios#approve_feedback', :via => :post
       match '/ios/get_all_requests' => 'ios#get_all_requests', :via => :post
+      match '/ios/get_all_sessions' => 'ios#get_all_sessions', :via => :post
     end
     match "*path" , to: "base#catch_404", via: :all
   end
