@@ -2,7 +2,7 @@ module Api
     module V1
         class IosController < BaseController
             before_action :get_user
-            skip_before_filter :restrict_access ,:only => [:configurations, :android_update, :login, :create_device, :age_groups, :sign_up, :forgot_password, :get_all_requests]
+            skip_before_filter :restrict_access ,:only => [:configurations, :android_update, :login, :create_device, :age_groups, :sign_up, :forgot_password, :get_all_requests, :get_all_sessions]
 
             # Create the APN Device
             def create_device
@@ -149,6 +149,26 @@ module Api
                 render :status=>200, :json=>{:success=>"1", :message=>"Success", :url=>"get_all_requests", :requests => requestsArray}
                 
             end
+
+            def get_all_sessions
+                lessonsArray = []
+                lessons = Lesson.all
+                lessons.each do |r|
+                    e = {}
+                    e['lesson_id'] = r.id.to_s
+                    e['lesson_name'] = r.name
+                    e['lesson_school_name'] = r.implementer_request.school.name
+                    e['lesson_program_name'] = r.implementer_request.program.name
+                    e['lesson_date'] = r.date.strftime('%d.%m.%y at %I:%M %p')
+                    e['lesson_classroom'] = r.implementer_request.classroom.to_s
+                    e['lesson_status'] = r.status
+
+                    lessonsArray.push(e)
+                end
+                render :status=>200, :json=>{:success=>"1", :message=>"Success", :url=>"get_all_sessions", :lessons => lessonsArray}
+                
+            end
+
 
             def age_groups
                 ageGroupsArray = []
