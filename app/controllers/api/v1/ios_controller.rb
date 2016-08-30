@@ -191,7 +191,7 @@ module Api
 
             def get_all_sessions
                 lessonsArray = []
-                lessons = Lesson.all.order("start_date DESC")
+                lessons = Lesson.all.order("date DESC")
                 lessons.each do |r|
                     e = {}
                     e['lesson_id'] = r.id.to_s
