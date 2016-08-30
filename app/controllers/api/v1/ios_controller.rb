@@ -2,7 +2,7 @@ module Api
     module V1
         class IosController < BaseController
             before_action :get_user
-            skip_before_filter :restrict_access ,:only => [:configurations, :android_update, :login, :create_device, :age_groups, :sign_up, :forgot_password, :get_all_requests, :get_all_sessions, :get_all_programs, :get_one_request, :get_one_program]
+            skip_before_filter :restrict_access ,:only => [:configurations, :android_update, :login, :create_device, :age_groups, :sign_up, :forgot_password, :get_all_requests, :get_all_sessions, :get_all_programs, :get_one_request, :get_one_program, :respond_to_request, :respond_to_program]
 
             # Create the APN Device
             def create_device
@@ -203,6 +203,28 @@ module Api
                 end
                 render :status=>200, :json=>{:success=>"1", :message=>"Success", :url=>"get_all_sessions", :lessons => lessonsArray}
                 
+            end
+
+            def respond_to_request
+                response = params[:response]
+                request = ImplementerRequest.where(id: params[:rid]).first
+                if(response == 0)
+                    request.refuse
+                else
+                    request.accept
+                end
+                render :status=>200, :json=>{:success=>"1", :message=>"Success", :url=>"respond_to_request"}
+            end
+
+            def respond_to_session
+                response = params[:response]
+                lesson = Lesson.where(id: params[:sid]).first
+                if(response == 0)
+                    lesson.refuse
+                else
+                    lesson.accept
+                end
+                render :status=>200, :json=>{:success=>"1", :message=>"Success", :url=>"respond_to_request"}
             end
 
 
