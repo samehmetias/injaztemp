@@ -31,12 +31,12 @@
     <%= f.label :uni_classes %><br>
     <%= f.number_field :uni_classes , class: "form-control" %>
   </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
   <fieldset class="form-group">
   <%= f.label :address, 'Address' %>
   <%= f.text_field :address, class: "form-control" %>
-  <small class="text-muted">You can also enter IP. Your IP is <%= request.ip %></small>
 </fieldset>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+  
 <% end %>
