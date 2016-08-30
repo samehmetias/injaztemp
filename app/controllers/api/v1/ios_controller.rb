@@ -126,7 +126,7 @@ module Api
             def get_all_requests
                 requestsArray = []
                 #requests = ImplementerRequest.where(user_id: @@current_user.id)
-                requests = ImplementerRequest.all.order("start_date DESC")
+                requests = ImplementerRequest.all.order("start_date ASC")
                 requests.each do |r|
                     e = {}
                     e['request_id'] = r.id.to_s
@@ -191,7 +191,7 @@ module Api
 
             def get_all_sessions
                 lessonsArray = []
-                lessons = Lesson.all.order("date DESC")
+                lessons = Lesson.all.order("date ASC")
                 lessons.each do |r|
                     e = {}
                     e['lesson_id'] = r.id.to_s
