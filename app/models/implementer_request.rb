@@ -1,7 +1,7 @@
 class ImplementerRequest < ActiveRecord::Base
-  belongs_to :school
-  belongs_to :program
-  belongs_to :user
+  belongs_to :school, :presence => true
+  belongs_to :program, :presence => true
+  belongs_to :user, :presence => true
   
   has_many :lessons, dependent: :destroy
   
