@@ -25,5 +25,8 @@
   <%= @school.uni_classes %>
 </p>
 
+<p>Address: <%= @school.address %></p>
+<p>Coordinates: <%= @school.latitude %> <%= @school.longitude %></p>
+
 <%= link_to 'Edit', edit_school_path(@school) %> |
 <%= link_to 'Back', schools_path %>

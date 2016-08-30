@@ -59,3 +59,4 @@ gem 'bootstrap-kaminari-views'
 
 gem 'rails_12factor', group: :production
 
+gem 'geocoder'
