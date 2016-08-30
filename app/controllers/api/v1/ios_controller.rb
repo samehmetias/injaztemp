@@ -151,7 +151,7 @@ module Api
             end
             def get_one_request
                 puts 'inside get_one_request'
-                request = ImplementerRequest.where(id: params[:r_id])
+                request = ImplementerRequest.first
                 # if request.nil?
                 #     return render :status=>200, :json=>{:success=>"0", :message=>"Sign up failed"}
                 # end
