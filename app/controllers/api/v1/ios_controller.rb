@@ -156,7 +156,7 @@ module Api
                     return render :status=>200, :json=>{:success=>"0", :message=>"Sign up failed"}
                 end
                 puts '======================='
-                puts request.inspect 
+                puts request.id.to_s
                 puts '======================='
                 # coords_requests = request.getCoordinators
                 # if(coords_requests.count > 0)
