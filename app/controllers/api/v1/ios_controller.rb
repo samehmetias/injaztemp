@@ -126,7 +126,7 @@ module Api
             def get_all_requests
                 requestsArray = []
                 #requests = ImplementerRequest.where(user_id: @@current_user.id)
-                requests = ImplementerRequest.all
+                requests = ImplementerRequest.all.order("start_date DESC")
                 requests.each do |r|
                     e = {}
                     e['request_id'] = r.id.to_s
@@ -188,7 +188,7 @@ module Api
 
             def get_all_sessions
                 lessonsArray = []
-                lessons = Lesson.all
+                lessons = Lesson.all.order("start_date DESC")
                 lessons.each do |r|
                     e = {}
                     e['lesson_id'] = r.id.to_s
@@ -208,7 +208,7 @@ module Api
             def respond_to_request
                 response = params[:response]
                 request = ImplementerRequest.where(id: params[:rid]).first
-                if(response == 0)
+                if(response == '0')
                     request.refuse
                 else
                     request.accept
@@ -219,9 +219,7 @@ module Api
             def respond_to_session
                 response = params[:response]
                 lesson = Lesson.where(id: params[:sid]).first
-                puts response
-                puts (response == 0)
-                puts (response == '0')
+
                 if(response == '0')
                     lesson.refuse
                 else
