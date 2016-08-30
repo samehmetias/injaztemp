@@ -3,12 +3,12 @@ class Lesson < ActiveRecord::Base
   
   #methods
 def accept
-self.status = 'YES'
-self.save
+	self.status = 'YES'
+	self.save
 end
   
   def refuse
     self.status = 'NO'
-self.save
+	self.save
   end
 end

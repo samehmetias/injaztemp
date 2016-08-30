@@ -219,7 +219,10 @@ module Api
             def respond_to_session
                 response = params[:response]
                 lesson = Lesson.where(id: params[:sid]).first
-                if(response == 0)
+                puts response
+                puts (response == 0)
+                puts (response == '0')
+                if(response == '0')
                     lesson.refuse
                 else
                     lesson.accept
