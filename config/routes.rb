@@ -64,6 +64,7 @@ Rails.application.routes.draw do
       match '/ios/get_one_request' => 'ios#get_one_request', :via => :post
       match '/ios/get_all_sessions' => 'ios#get_all_sessions', :via => :post
       match '/ios/get_all_programs' => 'ios#get_all_programs', :via => :post
+      match '/ios/get_one_program' => 'ios#get_one_program', :via => :post
     end
     match "*path" , to: "base#catch_404", via: :all
   end

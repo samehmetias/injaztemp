@@ -2,7 +2,7 @@ module Api
     module V1
         class IosController < BaseController
             before_action :get_user
-            skip_before_filter :restrict_access ,:only => [:configurations, :android_update, :login, :create_device, :age_groups, :sign_up, :forgot_password, :get_all_requests, :get_all_sessions, :get_all_programs, :get_one_request]
+            skip_before_filter :restrict_access ,:only => [:configurations, :android_update, :login, :create_device, :age_groups, :sign_up, :forgot_password, :get_all_requests, :get_all_sessions, :get_all_programs, :get_one_request, :get_one_program]
 
             # Create the APN Device
             def create_device
@@ -150,14 +150,10 @@ module Api
                 
             end
             def get_one_request
-                puts 'inside get_one_request'
                 request = ImplementerRequest.where(id: params[:rid]).first
                 if request.nil?
-                    return render :status=>200, :json=>{:success=>"0", :message=>"Sign up failed"}
+                    return render :status=>200, :json=>{:success=>"0", :message=>"No request found"}
                 end
-                puts '======================='
-                puts request.id.to_s
-                puts '======================='
                 coords_requests = request.getCoordinators
                 if(coords_requests.count > 0)
                     render :status=>200, :json=>{:success=>"1", :message=>"Success", :url=>"get_one_request", request_id:request.id.to_s,request_school_name: request.school.name,request_school_location: request.school.district,request_program: request.program.name,request_start_date: request.start_date.strftime('%d.%m.%y at %I:%M %p'),request_duration: request.program.duration.to_s,request_classroom: request.classroom.to_s,request_status: request.status, request_coord_name: coords_requests[0].user.name,request_coord_telephone: coords_requests[0].user.telephone.to_s}
@@ -180,6 +176,14 @@ module Api
                     programsArray.push(e)
                 end
                 render :status=>200, :json=>{:success=>"1", :message=>"Success", :url=>"get_all_programs", :programs => programsArray}
+            end
+
+            def get_one_program
+                program = Program.where(id: params[:pid]).first
+                if program.nil?
+                    return render :status=>200, :json=>{:success=>"0", :message=>"No program found"}
+                end
+                    render :status=>200, :json=>{:success=>"1", :message=>"Success", :url=>"get_one_request", :program_id => program.id.to_s,:program_name => program.name,:program_duration => program.duration.to_s,:program_overview => program.overview}
             end
 
             def get_all_sessions
