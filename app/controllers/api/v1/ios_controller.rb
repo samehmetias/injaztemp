@@ -152,18 +152,18 @@ module Api
             def get_one_request
                 puts 'inside get_one_request'
                 request = ImplementerRequest.first
-                # if request.nil?
-                #     return render :status=>200, :json=>{:success=>"0", :message=>"Sign up failed"}
-                # end
+                if request.nil?
+                    return render :status=>200, :json=>{:success=>"0", :message=>"Sign up failed"}
+                end
                 puts '======================='
                 puts request.id.to_s
                 puts '======================='
-                # coords_requests = request.getCoordinators
-                # if(coords_requests.count > 0)
-                #     render :status=>200, :json=>{:success=>"1", :message=>"Success", :url=>"get_one_request", request_id:request.id.to_s,request_school_name: request.school.name,request_school_location: request.school.district,request_program: request.program.name,request_start_date: request.start_date.strftime('%d.%m.%y at %I:%M %p'),request_duration: request.program.duration.to_s,request_classroom: request.classroom.to_s,request_status: request.status, request_coord_name: coords_requests[0].user.name,request_coord_telephone: coords_requests[0].user.telephone.to_s}
-                # else
+                coords_requests = request.getCoordinators
+                if(coords_requests.count > 0)
+                    render :status=>200, :json=>{:success=>"1", :message=>"Success", :url=>"get_one_request", request_id:request.id.to_s,request_school_name: request.school.name,request_school_location: request.school.district,request_program: request.program.name,request_start_date: request.start_date.strftime('%d.%m.%y at %I:%M %p'),request_duration: request.program.duration.to_s,request_classroom: request.classroom.to_s,request_status: request.status, request_coord_name: coords_requests[0].user.name,request_coord_telephone: coords_requests[0].user.telephone.to_s}
+                else
                     render :status=>200, :json=>{:success=>"1", :message=>"Success", :url=>"get_one_request", :request_id => request.id.to_s,:request_school_name => request.school.name,:request_school_location => request.school.district,:request_program => request.program.name,:request_start_date => request.start_date.strftime('%d.%m.%y at %I:%M %p'),:request_duration => request.program.duration.to_s,:request_classroom => request.classroom.to_s,:request_status => request.status}
-                # end
+                end
             end
 
             def get_all_programs
