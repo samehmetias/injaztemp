@@ -2,7 +2,7 @@ module Api
     module V1
         class IosController < BaseController
             before_action :get_user
-            skip_before_filter :restrict_access ,:only => [:configurations, :android_update, :login, :create_device, :age_groups, :sign_up, :forgot_password, :get_all_requests, :get_all_sessions, :get_all_programs, :get_one_request, :get_one_program, :respond_to_request, :respond_to_session]
+            skip_before_filter :restrict_access ,:only => [:configurations, :android_update, :login, :create_device, :age_groups, :sign_up, :forgot_password, :get_all_requests, :get_all_sessions, :get_all_programs, :get_one_request, :get_one_program, :respond_to_request, :respond_to_session, :about_injaz]
 
             # Create the APN Device
             def create_device
@@ -226,6 +226,11 @@ module Api
                     lesson.accept
                 end
                 render :status=>200, :json=>{:success=>"1", :message=>"Success", :url=>"respond_to_request"}
+            end
+
+            def about_injaz
+               render :status=>200, :json=>{:success=>"1", :message=>"Success", :url=>"about_injaz", :info => "INJAZ Egypt delivers experiential learning in financial literacy, work readiness and entrepreneurship, effectively enriching the ability of young people (between the ages of 11 and 27) to both engage in their own economic development and contribute to the strength of their communities and economies.
+                INJAZ has been working in Egypt for more than a decade under the Ministry of Social Solidarity, as an Egyptian NGO, and in collaboration with the Ministry of Education. INJAZ Egypt is a member nation of Junior Achievement Worldwide (JAW), the world’s largest and fastest growing organization specializing in economic education. It is also part of the regional network INJAZ Al-Arab, which harnesses the mentorship of Arab business leaders to help inspire a culture of entrepreneurialism and business innovation among Arab youth."} 
             end
 
 
