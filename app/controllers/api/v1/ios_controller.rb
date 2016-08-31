@@ -2,7 +2,7 @@ module Api
     module V1
         class IosController < BaseController
             before_action :get_user
-            skip_before_filter :restrict_access ,:only => [:configurations, :android_update, :login, :create_device, :age_groups, :sign_up, :forgot_password, :get_all_requests, :get_all_sessions, :get_all_programs, :get_one_request, :get_one_program, :respond_to_request, :respond_to_session, :about_injaz]
+            skip_before_filter :restrict_access ,:only => [:configurations, :android_update, :login, :create_device, :age_groups, :sign_up, :forgot_password, :get_all_requests, :get_all_programs, :get_one_request, :get_one_program, :respond_to_request, :respond_to_session, :about_injaz]
 
             # Create the APN Device
             def create_device
@@ -197,7 +197,7 @@ module Api
 
             def get_all_sessions
                 lessonsArray = []
-                lessons = Lesson.all.order("date ASC")
+                lessons = @@current_user.lessons.order("date ASC")
                 lessons.each do |r|
                     e = {}
                     e['lesson_id'] = r.id.to_s
