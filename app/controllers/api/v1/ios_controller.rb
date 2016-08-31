@@ -158,10 +158,16 @@ module Api
                     return render :status=>200, :json=>{:success=>"0", :message=>"No request found"}
                 end
                 coords_requests = request.getCoordinators
-                if(coords_requests.count > 0)
-                    render :status=>200, :json=>{:success=>"1", :message=>"Success", :url=>"get_one_request", request_id:request.id.to_s,request_school_name: request.school.name,request_school_location: request.school.district,request_program: request.program.name,request_start_date: request.start_date.strftime('%d.%m.%y at %I:%M %p'),request_duration: request.program.duration.to_s,request_classroom: request.classroom.to_s,request_status: request.status, request_coord_name: coords_requests[0].user.name,request_coord_telephone: coords_requests[0].user.telephone.to_s}
+                if(coords_requests.nil?)
+                    c=0
                 else
-                    render :status=>200, :json=>{:success=>"1", :message=>"Success", :url=>"get_one_request", :request_id => request.id.to_s,:request_school_name => request.school.name,:request_school_location => request.school.district,:request_program => request.program.name,:request_start_date => request.start_date.strftime('%d.%m.%y at %I:%M %p'),:request_duration => request.program.duration.to_s,:request_classroom => request.classroom.to_s,:request_status => request.status}
+                    c=coords_requests.count
+                end
+                if(c > 0)
+                    render :status=>200, :json=>{:success=>"1", :message=>"Success", :url=>"get_one_request",request_id:request.id.to_s,request_school_name: request.school.name,request_school_location: request.school.district,
+                        request_school_address: request.school.address, request_lat: request.school.latitude,request_long: request.school.longitude,request_program: request.program.name,request_start_date: request.start_date.strftime('%d.%m.%y at %I:%M %p'),request_duration: request.program.duration.to_s,request_classroom: request.classroom.to_s,request_status: request.status, request_coor_num: coords_requests.count.to_s, request_coord_name: coords_requests[0].user.name,request_coord_telephone: coords_requests[0].user.telephone.to_s}
+                else
+                    render :status=>200, :json=>{:success=>"1", :message=>"Success", :url=>"get_one_request", :request_id => request.id.to_s,:request_school_name => request.school.name,:request_school_location => request.school.district,request_school_address: request.school.address, request_lat: request.school.latitude,request_long: request.school.longitude,:request_program => request.program.name,:request_start_date => request.start_date.strftime('%d.%m.%y at %I:%M %p'),:request_duration => request.program.duration.to_s,:request_classroom => request.classroom.to_s,:request_status => request.status, request_coor_num: "0"}
                 end
             end
 
@@ -232,8 +238,7 @@ module Api
             end
 
             def about_injaz
-               render :status=>200, :json=>{:success=>"1", :message=>"Success", :url=>"about_injaz", :info => "INJAZ Egypt delivers experiential learning in financial literacy, work readiness and entrepreneurship, effectively enriching the ability of young people (between the ages of 11 and 27) to both engage in their own economic development and contribute to the strength of their communities and economies.
-                INJAZ has been working in Egypt for more than a decade under the Ministry of Social Solidarity, as an Egyptian NGO, and in collaboration with the Ministry of Education. INJAZ Egypt is a member nation of Junior Achievement Worldwide (JAW), the world’s largest and fastest growing organization specializing in economic education. It is also part of the regional network INJAZ Al-Arab, which harnesses the mentorship of Arab business leaders to help inspire a culture of entrepreneurialism and business innovation among Arab youth."} 
+               render :status=>200, :json=>{:success=>"1", :message=>"Success", :url=>"about_injaz", :info => "INJAZ Egypt delivers experiential learning in financial literacy, work readiness and entrepreneurship, effectively enriching the ability of young people (between the ages of 11 and 27) to both engage in their own economic development and contribute to the strength of their communities and economies. INJAZ has been working in Egypt for more than a decade under the Ministry of Social Solidarity, as an Egyptian NGO, and in collaboration with the Ministry of Education. INJAZ Egypt is a member nation of Junior Achievement Worldwide (JAW), the world’s largest and fastest growing organization specializing in economic education. It is also part of the regional network INJAZ Al-Arab, which harnesses the mentorship of Arab business leaders to help inspire a culture of entrepreneurialism and business innovation among Arab youth."} 
             end
 
 
