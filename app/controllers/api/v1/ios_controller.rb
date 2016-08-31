@@ -255,10 +255,9 @@ module Api
 
                 teacher = ['Be in charge of keeping track of time during an activity','Help the volunteer distribute surveys, name tags, etc.','Keep track of team scores']
 
-                all = []
 
 
-                render :status=>200, :json=>{:success=>"1", :message=>"Success", :url=>"tips_and_tricks", :tips_titles=>classroom_tips_titles, :tips_contents => classroom_tips_contents, :dos => dos, :donts => donts}
+                render :status=>200, :json=>{:success=>"1", :message=>"Success", :url=>"tips_and_tricks", :tips_titles=>classroom_tips_titles, :tips_contents => classroom_tips_contents, :dos => dos, :donts => donts, :contract => contract, :teacher => teacher}
 
             end
 
