@@ -2,7 +2,7 @@ module Api
     module V1
         class IosController < BaseController
             before_action :get_user
-            skip_before_filter :restrict_access ,:only => [:configurations, :android_update, :login, :create_device, :age_groups, :sign_up, :forgot_password, :get_all_requests, :get_all_programs, :get_one_request, :get_one_program, :respond_to_request, :respond_to_session, :about_injaz]
+            skip_before_filter :restrict_access ,:only => [:configurations, :android_update, :login, :create_device, :age_groups, :sign_up, :forgot_password]
 
             # Create the APN Device
             def create_device
@@ -125,8 +125,8 @@ module Api
 
             def get_all_requests
                 requestsArray = []
-                #requests = ImplementerRequest.where(user_id: @@current_user.id)
-                requests = ImplementerRequest.all.order("start_date ASC")
+                requests = ImplementerRequest.where(user_id: @@current_user.id)
+                #requests = ImplementerRequest.all.order("start_date ASC")
                 requests.each do |r|
                     e = {}
                     e['request_id'] = r.id.to_s
@@ -173,7 +173,8 @@ module Api
 
             def get_all_programs
                 programsArray = []
-                programs = Program.all
+                programs = Program.where(user_id: @@current_user.id)
+                # programs = Program.all
                 programs.each do |r|
                     e = {}
                     e['program_id'] = r.id.to_s
@@ -239,6 +240,26 @@ module Api
 
             def about_injaz
                render :status=>200, :json=>{:success=>"1", :message=>"Success", :url=>"about_injaz", :info => "INJAZ Egypt delivers experiential learning in financial literacy, work readiness and entrepreneurship, effectively enriching the ability of young people (between the ages of 11 and 27) to both engage in their own economic development and contribute to the strength of their communities and economies. INJAZ has been working in Egypt for more than a decade under the Ministry of Social Solidarity, as an Egyptian NGO, and in collaboration with the Ministry of Education. INJAZ Egypt is a member nation of Junior Achievement Worldwide (JAW), the world’s largest and fastest growing organization specializing in economic education. It is also part of the regional network INJAZ Al-Arab, which harnesses the mentorship of Arab business leaders to help inspire a culture of entrepreneurialism and business innovation among Arab youth."} 
+            end
+
+            def tips_and_tricks
+                classroom_tips_titles= ['Avoid controversial subjects i.e. religion, politics, sports etc.','Call the students by their names','Make the classroom space interactive & friendly','Avoid talking for longer than 10 minutes at a time','Show excitement at being in class']
+                
+                classroom_tips_contents = ['Students can be very sensitive towards controversial subjects, and they can instigate unnecessary arguments, thus dividing the students and inhibiting cooperation. Avoid discussing such matters, including football club teams (i.e. Ahly vs. Zamalek).','Using the students’ names rather than just anonymously calling them helps them feel recognized, communicates respect, and boosts the shy or withdrawn students’ confidence.','Arranging the classroom in a U-shape or circles, for example, allows the  lunteer to move around the classroom more, increasing the amount of interaction as well as the volunteer’s awareness of each student.','The average attention span of most adolescents is 10 – 12 minutes, sospeaking longer than that will most likely leave students unfocused and inattentive of what is being said.','According to UCLA psychology Professor Albert Mehrabian, 93% of communication is non-verbal, comprising of 55% body language and 38% tone of voice, so in order for the students to cooperate and be excited about the program, they must be able to perceive your interest and excitement.']
+
+                dos = ['Establish an effective contract during the very first session by:','Make a first impression that will equally solicit enthusiasm towards the program and respect towards you.','Be on time to class as that portrays a professional image to the students and facilitates delivering the program content in its entirety.','If the teacher is present in class, encourage them to:','It is important not to let the teacher’s presence distract you from focusing your attention on the students. If the teacher asks about the program, consult with the coordinator in order to give him/her a copy of the guidebook.']
+
+                donts = ['Dismiss students from class, as that goes against INJAZ’s educational philosophy.','Ask the teacher to help you manage the students/classroom or assign them the task of giving instructions to the students.','Talk about anything controversial as this can instigate unnecessary arguments, thus dividing the students and inhibiting cooperation. Avoid discussing matters such as religion, politics, football club teams (i.e. Ahly vs. Zamalek).']
+
+                contract = ['Explaining how this contract is similar to contracts that are signed at work places when someone is new to a job; it is important to tie in the market place from the very first session!','Listening to the students’ suggestions; make sure to involve them so that they feel ownership towards it and are more likely to uphold it','Clarifying vague concepts (ex. instead of “respect,” encourage specificity such as agreeing not to interrupt peers or the volunteer)','Including the hand gesture of staying quiet to signify its importance','Clarifying what the consequences of breaking the agreed upon contract terms will be','Creating a space for 2 signatures: 1 for the volunteer and 1 for the student','Remembering to hang the contract during every session','Using the term “contract” not “rules and regulations” when referring to the agreed upon terms.','Using the term “result” or “consequence” not “punishment” when referring to a term in the contract that a student breaks.']
+
+                teacher = ['Be in charge of keeping track of time during an activity','Help the volunteer distribute surveys, name tags, etc.','Keep track of team scores']
+
+                all = []
+
+
+                render :status=>200, :json=>{:success=>"1", :message=>"Success", :url=>"tips_and_tricks", :tips_titles=>classroom_tips_titles, :tips_contents => classroom_tips_contents, :dos => dos, :donts => donts}
+
             end
 
 
