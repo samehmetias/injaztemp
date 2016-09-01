@@ -173,7 +173,7 @@ module Api
 
             def get_all_programs
                 programsArray = []
-                programs = @@current_user.programs
+                programs = @@current_user.programs.distinct
                 programs.each do |r|
                     e = {}
                     e['program_id'] = r.id.to_s
