@@ -192,7 +192,7 @@ module Api
                 if program.nil?
                     return render :status=>200, :json=>{:success=>"0", :message=>"No program found"}
                 end
-                    render :status=>200, :json=>{:success=>"1", :message=>"Success", :url=>"get_one_request", :program_id => program.id.to_s,:program_name => program.name,:program_duration => program.duration.to_s,:program_overview => program.overview}
+                    render :status=>200, :json=>{:success=>"1", :message=>"Success", :url=>"get_one_program", :program_id => program.id.to_s,:program_name => program.name,:program_duration => program.duration.to_s,:program_overview => program.overview}
             end
 
             def get_all_sessions
