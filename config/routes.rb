@@ -69,6 +69,7 @@ Rails.application.routes.draw do
       match '/ios/respond_to_session' => 'ios#respond_to_session', :via => :post
       match '/ios/about_injaz' => 'ios#about_injaz', :via => :post
       match '/ios/tips_and_tricks' => 'ios#tips_and_tricks', :via => :post
+      match '/ios/get_companies' => 'ios#get_companies', :via => :post
     end
     match "*path" , to: "base#catch_404", via: :all
   end

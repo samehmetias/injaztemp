@@ -2,7 +2,7 @@ module Api
     module V1
         class IosController < BaseController
             before_action :get_user
-            skip_before_filter :restrict_access ,:only => [:configurations, :android_update, :login, :create_device, :age_groups, :sign_up, :forgot_password]
+            skip_before_filter :restrict_access ,:only => [:configurations, :android_update, :login, :create_device, :age_groups, :sign_up, :forgot_password, :get_companies]
 
             # Create the APN Device
             def create_device
@@ -258,6 +258,18 @@ module Api
 
                 render :status=>200, :json=>{:success=>"1", :message=>"Success", :url=>"tips_and_tricks", :tips_titles=>classroom_tips_titles, :tips_contents => classroom_tips_contents, :dos => dos, :donts => donts, :contract => contract, :teacher => teacher}
 
+            end
+
+            def get_companies
+                c = Company.all.order("name DESC")
+                companies = []
+                c.each do |r|
+                    e = {}
+                    e['compani_id'] = r.id.to_s
+                    e['company_name'] = r.name
+                    companies.push(e)
+                end
+                render :status=>200, :json=>{:success=>"1", :message=>"Success", :url=>"get_companies", :companies_info=>companies}
             end
 
 
