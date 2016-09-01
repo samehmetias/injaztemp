@@ -173,8 +173,7 @@ module Api
 
             def get_all_programs
                 programsArray = []
-                programs = Program.where(user_id: @@current_user.id)
-                # programs = Program.all
+                programs = @@current_user.programs
                 programs.each do |r|
                     e = {}
                     e['program_id'] = r.id.to_s
