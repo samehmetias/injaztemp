@@ -289,6 +289,7 @@ module Api
                 u = User.find_by_email(params[:email].downcase)
                 return render :status=>200, :json=>{:success=>"0", :message=>"This email is already in use"} if u
 
+
                 u = User.new
                 name = params[:name].downcase.split.map(&:capitalize)*' '
                 u.name = params[:name].downcase.split.map(&:capitalize)*' '

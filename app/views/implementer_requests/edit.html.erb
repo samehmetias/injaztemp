@@ -24,6 +24,7 @@
 
   <%= f.association :school, :include_blank => 'Select School',:selected => @implementer_request.school.id%>
   <%= f.input :classroom %>
+  <%= f.input :status %>
 
 
   <%= f.button :submit %>
