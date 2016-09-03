@@ -84,7 +84,12 @@ class EmployeesController < ApplicationController
 
   def notifyUser
     apn = ApnHelper::Apn.new
-    apn.delay(:priority => 1).sendAlert(Phone.first.token, "Injaz","",true)
+    id = @employee.id
+    token = Phone.where(userid: id)
+    puts '++++++++++NotifyUser+++++++++++++'
+      puts token
+    puts '++++++++++NotifyUser+++++++++++++'
+    apn.delay(:priority => 1).sendAlert(token, "Injaz","",true)
     render :text => '1'
   end
 
