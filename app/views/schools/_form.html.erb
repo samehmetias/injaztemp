@@ -1,4 +1,4 @@
-<%= form_for(@school) do |f| %>
+  <%= form_for(@school) do |f| %>
   <% if @school.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@school.errors.count, "error") %> prohibited this school from being saved:</h2>
@@ -35,6 +35,17 @@
   <%= f.label :address, 'Address' %>
   <%= f.text_field :address, class: "form-control" %>
 </fieldset>
+
+<div class="field">
+    <%= f.label :latitude %><br>
+    <%= f.number_field :latitude , class: "form-control" %>
+  </div>
+
+  <div class="field">
+    <%= f.label :longitude %><br>
+    <%= f.number_field :longitude , class: "form-control" %>
+  </div>
+
   <div class="actions">
     <%= f.submit %>
   </div>
