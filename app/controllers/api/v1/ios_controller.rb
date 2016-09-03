@@ -295,13 +295,11 @@ module Api
                 u.name = params[:name].downcase.split.map(&:capitalize)*' '
                 u.email = params[:email]
                 u.password = params[:password]
-                u.mobile_no = params[:mobile]
-                u.date_of_birth = params[:date_of_birth]
-                u.gender = params[:gender]
-                u.age_group_id = params[:age_group].to_i
-                image = Paperclip.io_adapters.for(params[:profile_picture])
-                image.original_filename = (name.sub! ' ', '_') + ".gif"
-                u.profile_picture = image
+                u.telephone = params[:mobile]
+                u.company_id = params[:company_id]
+                u.employee_type = params[:role]
+                u.area_residence = params[:location]
+                
                 u.save
 
                 @@current_user = User.find_by_email(params[:email])
