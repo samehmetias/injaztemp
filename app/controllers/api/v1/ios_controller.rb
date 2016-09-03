@@ -20,7 +20,7 @@ module Api
                         p = Phone.create(:is_android => false, :uuid => params[:device_uuid] , :token => params[:regId])
                     end
                 end
-                render :status=>200, :json=>{:success=>"1", :message=>"Success", :url => "create_device"}
+                render :status=>200, :json=>{:success=>"1", :message=>"Success", :url => "create_device", :uuid => params[:device_uuid]}
             end
 
             def get_user
@@ -117,6 +117,18 @@ module Api
                     e['program_overview'] = r.overview
 
                     programsArray.push(e)
+                end
+
+                uuid = params[:uuid]
+                phones = Phone.where(uuid: uuid)
+                phones.each do |p|
+                    puts "============uuid=================="
+                    puts uuid.inspect
+                    puts @@current_user.name
+                    puts p.token
+                    puts "=============================="
+
+                    p.user_id = @@current_user.id.to_s
                 end
 
                 render :status=>200, :json=>{:success=>"1", :message=>"Success", :url=>"login", :user=>{id: @@current_user.id.to_s, name: @@current_user.name, company_name: @@current_user.company.name, telephone: @@current_user.telephone.to_s}, :token=>userToken, :requests => requestsArray, :lessons => lessonsArray, :programs => programsArray}
