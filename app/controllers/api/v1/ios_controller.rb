@@ -265,7 +265,7 @@ module Api
                 companies = []
                 c.each do |r|
                     e = {}
-                    e['compani_id'] = r.id.to_s
+                    e['company_id'] = r.id.to_s
                     e['company_name'] = r.name
                     companies.push(e)
                 end
