@@ -85,7 +85,7 @@ class EmployeesController < ApplicationController
   def notifyUser
     apn = ApnHelper::Apn.new
     id = 2
-    token = Phone.where(userid: id)
+    token = Phone.where(user_id: id)
     puts '++++++++++NotifyUser+++++++++++++'
       puts token
     puts '++++++++++NotifyUser+++++++++++++'
