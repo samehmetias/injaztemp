@@ -120,16 +120,16 @@ module Api
                     programsArray.push(e)
                 end
 
-                uuid = params[:uuid]
+                uuid = params[:device_uuid]
                 phones = Phone.where(uuid: uuid)
                 puts "============uuid=================="
-                puts uuid.inspect
+                puts uuid
                 puts @@current_user.name
                 puts "=============================="
 
                 phones.each do |p|
                     puts "============uuid=================="
-                    puts uuid.inspect
+                    puts uuid
                     puts @@current_user.name
                     puts p.token
                     puts "=============================="
