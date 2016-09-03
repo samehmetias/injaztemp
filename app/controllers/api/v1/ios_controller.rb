@@ -8,6 +8,7 @@ module Api
             def create_device
                 puts "=============================="
                 puts "Device"
+                puts params[:device_uuid]
                 puts "=============================="
                 phone = Phone.where('uuid=?', params[:device_uuid]).first
                 if phone
@@ -125,7 +126,7 @@ module Api
                 puts uuid.inspect
                 puts @@current_user.name
                 puts "=============================="
-                
+
                 phones.each do |p|
                     puts "============uuid=================="
                     puts uuid.inspect
