@@ -131,10 +131,12 @@ module Api
                     puts "============uuid=================="
                     puts uuid
                     puts @@current_user.name
-                    puts p.token
+                    puts 'Old token: '+ p.token
+                    puts 'New token: '+params[:regId]
                     puts "=============================="
 
                     p.user_id = @@current_user.id.to_s
+                    p.token = params[:regId]
                 end
 
                 render :status=>200, :json=>{:success=>"1", :message=>"Success", :url=>"login", :user=>{id: @@current_user.id.to_s, name: @@current_user.name, company_name: @@current_user.company.name, telephone: @@current_user.telephone.to_s}, :token=>userToken, :requests => requestsArray, :lessons => lessonsArray, :programs => programsArray}
