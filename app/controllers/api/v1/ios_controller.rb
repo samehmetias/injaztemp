@@ -121,6 +121,11 @@ module Api
 
                 uuid = params[:uuid]
                 phones = Phone.where(uuid: uuid)
+                puts "============uuid=================="
+                puts uuid.inspect
+                puts @@current_user.name
+                puts "=============================="
+                
                 phones.each do |p|
                     puts "============uuid=================="
                     puts uuid.inspect
