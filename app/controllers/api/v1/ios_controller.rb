@@ -157,12 +157,17 @@ module Api
                     e['request_duration'] = r.program.duration.to_s
                     e['request_classroom'] = r.classroom.to_s
                     e['request_status'] = r.status
+                    e['request_lat'] = r.school.latitude
+                    e['request_lon'] = r.school.longitude
+                    e['request_school_address'] = r.school.address
+                    
                     coords_requests = r.getCoordinators
+                    e['request_coor_num'] = coords_requests.count.to_s
                     i = 0
                     if (!(coords_requests.nil?))
                       while i < coords_requests.count do
-                        e['request_coord_name'+i.to_s] = coords_requests[i].user.name
-                        e['request_coord_telephone'+i.to_s] = coords_requests[i].user.telephone.to_s
+                        e['request_coord_name'] = coords_requests[i].user.name
+                        e['request_coord_telephone'] = coords_requests[i].user.telephone.to_s
                         i = i+1
                      end  
                     end
