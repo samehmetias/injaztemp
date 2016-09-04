@@ -329,7 +329,7 @@ module Api
                 @@current_user.valid_password?(params[:password])
                 @@current_user.ensure_authentication_token!
                 userToken = @@current_user.api_key.key.to_s
-                render :status=>200, :json=>{:success=>"1", :message=>"Success", :url=>"sign_up", :user=>{id: @@current_user.id.to_s, name: @@current_user.name}, :token=>userToken}
+                render :status=>200, :json=>{:success=>"1", :message=>"Success", :url=>"sign_up", :user=>{id: @@current_user.id.to_s, name: @@current_user.name}, :token=>userToken, :email => params[:email], :password => params[:password]}
             end
 
             def get_past_events
