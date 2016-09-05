@@ -22,7 +22,7 @@ class ImplementerRequest < ActiveRecord::Base
       @l.date = @d + (@i*7).days
       @l.name = 'Session '+(@i+1).to_s
       @l.start_time = st
-      @l.start_time = et
+      @l.end_time = et
       self.lessons << @l
       @i = @i+1
     end
