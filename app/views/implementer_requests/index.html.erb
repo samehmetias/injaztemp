@@ -24,7 +24,7 @@
       <tr>
         
         <td><%= implementer_request.classroom %></td>
-        <td><%= implementer_request.start_date %></td>
+        <td><%= implementer_request.start_date.strftime('%a, %d.%m.%y') %></td>
         <td><%= implementer_request.start_time %></td>
         <td><%= implementer_request.end_time %></td>
         <td><%= implementer_request.duration %></td>
