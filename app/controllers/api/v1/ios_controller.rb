@@ -78,7 +78,7 @@ module Api
                     e['request_school_name'] = r.school.name
                     e['request_school_location'] = r.school.district
                     e['request_program'] = r.program.name
-                    e['request_start_date'] = r.start_date.strftime('%d.%m.%y at %I:%M %p')
+                    e['request_start_date'] = r.start_date.strftime('%d.%m.%y')
                     e['request_duration'] = r.program.duration.to_s
                     e['request_classroom'] = r.classroom.to_s
                     e['request_status'] = r.status
@@ -153,7 +153,9 @@ module Api
                     e['request_school_name'] = r.school.name
                     e['request_school_location'] = r.school.district
                     e['request_program'] = r.program.name
-                    e['request_start_date'] = r.start_date.strftime('%d.%m.%y at %I:%M %p')
+                    e['request_start_date'] = r.start_date.strftime('%a, %d.%m.%y')
+                    e['request_start_time'] = r.start_time.strftime("%H:%M")
+                    e['request_end_time'] = r.end_time.strftime("%H:%M")
                     e['request_duration'] = r.program.duration.to_s
                     e['request_classroom'] = r.classroom.to_s
                     e['request_status'] = r.status
@@ -190,9 +192,9 @@ module Api
                 end
                 if(c > 0)
                     render :status=>200, :json=>{:success=>"1", :message=>"Success", :url=>"get_one_request",request_id:request.id.to_s,request_school_name: request.school.name,request_school_location: request.school.district,
-                        request_school_address: request.school.address, request_lat: request.school.latitude,request_long: request.school.longitude,request_program: request.program.name,request_start_date: request.start_date.strftime('%d.%m.%y at %I:%M %p'),request_duration: request.program.duration.to_s,request_classroom: request.classroom.to_s,request_status: request.status, request_coor_num: coords_requests.count.to_s, request_coord_name: coords_requests[0].user.name,request_coord_telephone: coords_requests[0].user.telephone.to_s}
+                        request_school_address: request.school.address, request_lat: request.school.latitude,request_long: request.school.longitude,request_program: request.program.name,request_start_date: request.start_date.strftime('%d.%m.%y'),:request_start_time => request.start_time.strftime("%H:%M"), :request_end_time => request.end_time.strftime("%H:%M"),request_duration: request.program.duration.to_s,request_classroom: request.classroom.to_s,request_status: request.status, request_coor_num: coords_requests.count.to_s, request_coord_name: coords_requests[0].user.name,request_coord_telephone: coords_requests[0].user.telephone.to_s}
                 else
-                    render :status=>200, :json=>{:success=>"1", :message=>"Success", :url=>"get_one_request", :request_id => request.id.to_s,:request_school_name => request.school.name,:request_school_location => request.school.district,request_school_address: request.school.address, request_lat: request.school.latitude,request_long: request.school.longitude,:request_program => request.program.name,:request_start_date => request.start_date.strftime('%d.%m.%y at %I:%M %p'),:request_duration => request.program.duration.to_s,:request_classroom => request.classroom.to_s,:request_status => request.status, request_coor_num: "0"}
+                    render :status=>200, :json=>{:success=>"1", :message=>"Success", :url=>"get_one_request", :request_id => request.id.to_s,:request_school_name => request.school.name,:request_school_location => request.school.district,request_school_address: request.school.address, request_lat: request.school.latitude,request_long: request.school.longitude,:request_program => request.program.name,:request_start_date => request.start_date.strftime('%d.%m.%y'),:request_start_time => request.start_time.strftime("%H:%M"), :request_end_time => request.end_time.strftime("%H:%M"), :request_duration => request.program.duration.to_s,:request_classroom => request.classroom.to_s,:request_status => request.status, request_coor_num: "0"}
                 end
             end
 
@@ -229,7 +231,9 @@ module Api
                     e['lesson_name'] = r.name
                     e['lesson_school_name'] = r.implementer_request.school.name
                     e['lesson_program_name'] = r.implementer_request.program.name
-                    e['lesson_date'] = r.date.strftime('%d.%m.%y at %I:%M %p')
+                    e['lesson_date'] = r.date.strftime('%d.%m.%y')
+                    e['lesson_start_time'] = r.start_time.strftime("%H:%M")
+                    e['lesson_end_time'] = r.end_time.strftime("%H:%M")
                     e['lesson_classroom'] = r.implementer_request.classroom.to_s
                     e['lesson_status'] = r.status
 
