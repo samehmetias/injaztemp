@@ -106,6 +106,6 @@ class ImplementerRequestsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def implementer_request_params
-      params.require(:implementer_request).permit(:classroom, :start_date, :duration, :status, :school_id, :user_id, :program_id)
+      params.require(:implementer_request).permit(:classroom, :start_date, :duration, :status, :school_id, :user_id, :program_id,:start_time,:end_time)
     end
 end
