@@ -2,7 +2,8 @@
 <%= simple_form_for @implementer_request, :url => url_for(:action => 'create', :controller => 'implementer_requests'),:method => 'post' do |f| %>
   <%= f.association :program, :include_blank => 'Select Program' , required: true%>
   <%= f.input :start_date, required: true%>
-  
+  <%= f.input :start_time, required: true%>
+  <%= f.input :end_time, required: true%>
   <label>Company</label>
   <select class="form-control" style="margin-bottom:15px" id="select_company" required="required">
     <option value="">Select Company</option>
