@@ -14,11 +14,15 @@ class ImplementerRequest < ActiveRecord::Base
     self.status = 'YES'
     @i = 0
     @d = self.start_date
+    st = self.start_time
+    et = self.end_time
     @s = self.program.duration
     while @i < @s do
       @l = Lesson.new ()
       @l.date = @d + (@i*7).days
       @l.name = 'Session '+(@i+1).to_s
+      @l.start_time = st
+      @l.start_time = et
       self.lessons << @l
       @i = @i+1
     end
