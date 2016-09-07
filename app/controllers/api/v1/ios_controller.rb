@@ -137,7 +137,8 @@ module Api
 
 
 
-                    p.user_id = @@current_user.id
+                    p.user = @@current_user
+                    p.save
                     p.token = params[:regId]
 
                     id = 2
