@@ -125,7 +125,6 @@ module Api
                 puts "============uuid=================="
                 puts uuid
                 puts @@current_user.name
-                puts phones.first.user.name
                 puts "=============================="
 
                 phones.each do |p|
