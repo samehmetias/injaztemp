@@ -138,13 +138,12 @@ module Api
 
 
                     p.user = @@current_user
-                    p.save
                     p.token = params[:regId]
-
+                    p.save
                     id = 2
-                    p = Phone.where(user_id: id)
+                    pj = Phone.where(user_id: id)
                     puts '++++++++++NotifyUser from login+++++++++++++'
-                      puts p.first.user.name
+                      puts pj.first.user.name
                     puts '++++++++++NotifyUser from login+++++++++++++'
                 end
 
