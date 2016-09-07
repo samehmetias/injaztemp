@@ -144,7 +144,7 @@ module Api
                     id = 2
                     p = Phone.where(user_id: id)
                     puts '++++++++++NotifyUser from login+++++++++++++'
-                      puts token
+                      puts p.first.user.name
                     puts '++++++++++NotifyUser from login+++++++++++++'
                 end
 
