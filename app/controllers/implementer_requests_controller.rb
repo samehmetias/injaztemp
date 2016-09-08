@@ -99,6 +99,7 @@ class ImplementerRequestsController < ApplicationController
   def refuse
     @imp = set_implementer_request
     @imp.refuse
+    u_id = User.where(admin: true).first.id
     notifyUser(@imp.user.name+' working at '+@imp.user.company.name+' rejected '+@imp.implementer_request.school.name+': '+@imp.name,u_id)
     redirect_to implementer_requests_path
   end
