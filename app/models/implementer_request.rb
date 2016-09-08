@@ -33,7 +33,7 @@ class ImplementerRequest < ActiveRecord::Base
     self.status = 'NO'
     self.save
     u_id = User.where(admin: true).first.id
-    notifyUser(self.user.name+' working at '+self.user.company.name+' rejected '+self.implementer_request.school.name+': '+self.name,u_id)
+    notifyUser(self.user.name+' working at '+self.user.company.name+' rejected '+self.school.name+ ' on '+self.start_date.strftime('%A, %d.%m.%y'),u_id)
   end
 
   def notifyUser(message,u_id)
