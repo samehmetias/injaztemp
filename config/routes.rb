@@ -16,7 +16,7 @@ Rails.application.routes.draw do
     member do
       patch :accept
       patch :refuse
-            post :notifyUser
+      post :notifyUser
     end
   end
 

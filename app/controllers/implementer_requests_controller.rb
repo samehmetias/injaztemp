@@ -108,7 +108,7 @@ class ImplementerRequestsController < ApplicationController
     puts '++++++++++NotifyUser+++++++++++++'
       puts token
     puts '++++++++++NotifyUser+++++++++++++'
-    apn.delay(:priority => 1).sendAlert(token, "INJAZ Egypt",message,'',true)
+    apn.delay(:priority => 1).sendAlert(token, "INJAZ Egypt",message,"",true)
     # render :text => '1'
   end
 
