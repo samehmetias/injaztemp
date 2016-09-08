@@ -61,7 +61,7 @@ class ImplementerRequest < ActiveRecord::Base
       puts '++++++++++remindUser+++++++++++++'
       # apn.delay(:priority => 1).sendAlert(token, "INJAZ Egypt",message,"",true)
       if(!(self.status=='NO'))
-        apn.delay(:priority => 1, :run_at => d - 1.days, :queue => self.id.to_s).sendAlert(token, "INJAZ Egypt",message,"",true)
+        apn.delay(:priority => 1, :run_at => d - 1.days  + 2.hours, :queue => self.id.to_s).sendAlert(token, "INJAZ Egypt",message,"",true)
       end
       # render :text => '1'
     end
