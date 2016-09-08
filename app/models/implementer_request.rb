@@ -32,6 +32,22 @@ class ImplementerRequest < ActiveRecord::Base
   def refuse
     self.status = 'NO'
     self.save
+    u_id = User.where(admin: true).first.id
+    puts '++++++++++refuse+++++++++++++'
+      puts 'user id'+u_id
+    puts '++++++++++Refuse+++++++++++++'
+    notifyUser(@imp.user.name+' working at '+@imp.user.company.name+' rejected '+@imp.implementer_request.school.name+': '+@imp.name,u_id)
+  end
+
+  def notifyUser(message,u_id)
+    apn = ApnHelper::Apn.new
+    id = u_id
+    token = Phone.where(user_id: id).first.token
+    puts '++++++++++NotifyUser+++++++++++++'
+      puts token
+    puts '++++++++++NotifyUser+++++++++++++'
+    apn.delay(:priority => 1).sendAlert(token, "INJAZ Egypt",message,"",true)
+    # render :text => '1'
   end
 
   def getCoordinators
