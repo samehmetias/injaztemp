@@ -83,23 +83,6 @@ class LessonsController < ApplicationController
     redirect_to lessons_path
   end
 
-  def remindUser(message,u_id)
-    apn = ApnHelper::Apn.new
-    id = u_id
-    u = Phone.where(user_id: id).first
-    if (!(u.nil?))
-      token = u.token
-      puts '++++++++++remindUser+++++++++++++'
-        puts token
-      puts '++++++++++remindUser+++++++++++++'
-      # apn.delay(:priority => 1).sendAlert(token, "INJAZ Egypt",message,"",true)
-      if(!(self.status=='NO'))
-        apn.delay(:priority => 1, :run_at => self.date - 1.days, :queue => self.id.to_s).sendAlert(token, "INJAZ Egypt",message,"",true)
-    end
-      # render :text => '1'
-    end
-  end
-
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_lesson
