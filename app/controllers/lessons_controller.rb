@@ -80,8 +80,6 @@ class LessonsController < ApplicationController
     def refuse
     @imp = set_lesson
     @imp.refuse
-    u_id = User.where(admin: true).first.id
-    notifyUser(@imp.user.name+' working at '+@imp.user.company.name+' rejected '+@imp.implementer_request.school.name+': '+@imp.name,u_id)
     redirect_to lessons_path
   end
 
