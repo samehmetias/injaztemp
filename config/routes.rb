@@ -16,13 +16,13 @@ Rails.application.routes.draw do
     member do
       patch :accept
       patch :refuse
+            post :notifyUser
     end
   end
 
   resources :employees do
     collection do
       post :getCompanyUsers
-      post :notifyUser
     end
   end
 

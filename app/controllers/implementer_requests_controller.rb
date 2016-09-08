@@ -47,10 +47,13 @@ class ImplementerRequestsController < ApplicationController
   def create
     @implementer_request = ImplementerRequest.new(implementer_request_params)
 
+
     respond_to do |format|
       if @implementer_request.save
+        notifyUser('Hey '+@implementer_request.user.name+'! You recieved implementation details for the following school: '+@implementer_request.school.name,@implementer_request.user_id)
         format.html { redirect_to @implementer_request, notice: 'Implementer request was successfully created.' }
         format.json { render :show, status: :created, location: @implementer_request }
+
       else
         format.html { render :new }
         format.json { render json: @implementer_request.errors, status: :unprocessable_entity }
@@ -96,6 +99,17 @@ class ImplementerRequestsController < ApplicationController
     @imp = set_implementer_request
     @imp.refuse
     redirect_to implementer_requests_path
+  end
+
+  def notifyUser(message,u_id)
+    apn = ApnHelper::Apn.new
+    id = u_id
+    token = Phone.where(user_id: id).first.token
+    puts '++++++++++NotifyUser+++++++++++++'
+      puts token
+    puts '++++++++++NotifyUser+++++++++++++'
+    apn.delay(:priority => 1).sendAlert(token, "INJAZ Egypt",message,true)
+    # render :text => '1'
   end
 
   private

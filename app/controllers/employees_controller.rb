@@ -82,16 +82,7 @@ class EmployeesController < ApplicationController
     return render :json => users_array.to_json  
   end
 
-  def notifyUser
-    apn = ApnHelper::Apn.new
-    id = 2
-    token = Phone.where(user_id: id).first.token
-    puts '++++++++++NotifyUser+++++++++++++'
-      puts token
-    puts '++++++++++NotifyUser+++++++++++++'
-    apn.delay(:priority => 1).sendAlert(token, "Injaz","",true)
-    render :text => '1'
-  end
+
 
   private
     # Use callbacks to share common setup or constraints between actions.
