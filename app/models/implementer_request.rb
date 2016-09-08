@@ -35,16 +35,18 @@ class ImplementerRequest < ActiveRecord::Base
     u_id = User.where(admin: true).first.id
     notifyUser(self.user.name+' working at '+self.user.company.name+' rejected '+self.school.name+ ' on '+self.start_date.strftime('%A, %d.%m.%y'),u_id)
   end
-
   def notifyUser(message,u_id)
     apn = ApnHelper::Apn.new
     id = u_id
-    token = Phone.where(user_id: id).first.token
-    puts '++++++++++NotifyUser+++++++++++++'
-      puts token
-    puts '++++++++++NotifyUser+++++++++++++'
-    apn.delay(:priority => 1).sendAlert(token, "INJAZ Egypt",message,"",true)
-    # render :text => '1'
+    u = Phone.where(user_id: id).first
+    if (!(u.nil?))
+      token = u.token
+      puts '++++++++++NotifyUser+++++++++++++'
+        puts token
+      puts '++++++++++NotifyUser+++++++++++++'
+      apn.delay(:priority => 1).sendAlert(token, "INJAZ Egypt",message,"",true)
+      # render :text => '1'
+    end
   end
 
   def getCoordinators
