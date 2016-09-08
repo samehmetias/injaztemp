@@ -34,7 +34,7 @@ class ImplementerRequest < ActiveRecord::Base
     self.save
     u_id = User.where(admin: true).first.id
     puts '++++++++++refuse+++++++++++++'
-      puts 'user id'+u_id
+      puts 'user id'+u_id.to_s
     puts '++++++++++Refuse+++++++++++++'
     notifyUser(@imp.user.name+' working at '+@imp.user.company.name+' rejected '+@imp.implementer_request.school.name+': '+@imp.name,u_id)
   end
