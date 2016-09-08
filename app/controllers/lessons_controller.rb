@@ -38,6 +38,7 @@ class LessonsController < ApplicationController
 
     respond_to do |format|
       if @lesson.save
+        remindUser("You have a session tomorrow!",@lesson.implementer_request.user.id)
         format.html { redirect_to @lesson, notice: 'Lesson was successfully created.' }
         format.json { render :show, status: :created, location: @lesson }
       else
@@ -81,6 +82,23 @@ class LessonsController < ApplicationController
     @imp = set_lesson
     @imp.refuse
     redirect_to lessons_path
+  end
+
+  def remindUser(message,u_id)
+    apn = ApnHelper::Apn.new
+    id = u_id
+    u = Phone.where(user_id: id).first
+    if (!(u.nil?))
+      token = u.token
+      puts '++++++++++remindUser+++++++++++++'
+        puts token
+      puts '++++++++++remindUser+++++++++++++'
+      # apn.delay(:priority => 1).sendAlert(token, "INJAZ Egypt",message,"",true)
+      if(!(self.status=='NO'))
+        apn.delay(:priority => 1, :run_at => self.date - 1.days, :queue => self.id.to_s).sendAlert(token, "INJAZ Egypt",message,"",true)
+    end
+      # render :text => '1'
+    end
   end
 
   private

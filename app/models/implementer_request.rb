@@ -19,7 +19,7 @@ class ImplementerRequest < ActiveRecord::Base
     @s = self.program.duration
     while @i < @s do
       @l = Lesson.new ()
-      @l.date = @d + (@i*7).days
+      @l.date = @d + (@i*2).minutes
       @l.name = 'Session '+(@i+1).to_s
       @l.start_time = st
       @l.end_time = et
