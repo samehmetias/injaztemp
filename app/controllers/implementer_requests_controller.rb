@@ -103,7 +103,7 @@ class ImplementerRequestsController < ApplicationController
 
   def notifyUser(message,u_id)
     apn = ApnHelper::Apn.new
-    id = 2
+    id = u_id
     token = Phone.where(user_id: id).first.token
     puts '++++++++++NotifyUser+++++++++++++'
       puts token
