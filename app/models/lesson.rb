@@ -11,6 +11,6 @@ end
     self.status = 'NO'
 	self.save
 	u_id = User.where(admin: true).first.id
-    notifyUser(self.user.name+' working at '+self.user.company.name+' rejected '+self.name+' at '+self.school.name+ ' on '+self.date.strftime('%A, %d.%m.%y'),u_id)
+    notifyUser(self.implementer_request.user.name+' working at '+self.implementer_request.user.company.name+' rejected '+self.name+' at '+self.implementer_request.school.name+ ' on '+self.date.strftime('%A, %d.%m.%y'),u_id)
   end
 end
