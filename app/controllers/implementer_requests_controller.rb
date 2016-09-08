@@ -66,6 +66,7 @@ class ImplementerRequestsController < ApplicationController
   def update
     respond_to do |format|
       if @implementer_request.update(implementer_request_params)
+        notifyUser('Your implementation details have been updated',@implementer_request.user_id)
         format.html { redirect_to @implementer_request, notice: 'Implementer request was successfully updated.' }
         format.json { render :show, status: :ok, location: @implementer_request }
       else
@@ -98,6 +99,7 @@ class ImplementerRequestsController < ApplicationController
   def refuse
     @imp = set_implementer_request
     @imp.refuse
+    notifyUser(@imp.user.name+' working at '+@imp.user.company.name+' rejected '+@imp.implementer_request.school.name+': '+@imp.name,u_id)
     redirect_to implementer_requests_path
   end
 
