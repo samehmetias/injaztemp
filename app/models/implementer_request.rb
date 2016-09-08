@@ -24,7 +24,7 @@ class ImplementerRequest < ActiveRecord::Base
       @l.start_time = st
       @l.end_time = et
       self.lessons << @l
-      remindUser("You have a session tomorrow!",self.user.id)
+      remindUser("You have a session tomorrow!",self.user.id,@l.date)
       @i = @i+1
     end
   self.save
@@ -50,7 +50,7 @@ class ImplementerRequest < ActiveRecord::Base
     end
   end
 
-  def remindUser(message,u_id)
+  def remindUser(message,u_id,d)
     apn = ApnHelper::Apn.new
     id = u_id
     u = Phone.where(user_id: id).first
@@ -61,7 +61,7 @@ class ImplementerRequest < ActiveRecord::Base
       puts '++++++++++remindUser+++++++++++++'
       # apn.delay(:priority => 1).sendAlert(token, "INJAZ Egypt",message,"",true)
       if(!(self.status=='NO'))
-        apn.delay(:priority => 1, :run_at => self.date - 1.days, :queue => self.id.to_s).sendAlert(token, "INJAZ Egypt",message,"",true)
+        apn.delay(:priority => 1, :run_at => d - 1.days, :queue => self.id.to_s).sendAlert(token, "INJAZ Egypt",message,"",true)
       end
       # render :text => '1'
     end
