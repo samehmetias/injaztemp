@@ -38,7 +38,6 @@ class LessonsController < ApplicationController
 
     respond_to do |format|
       if @lesson.save
-        remindUser("You have a session tomorrow!",@lesson.implementer_request.user.id)
         format.html { redirect_to @lesson, notice: 'Lesson was successfully created.' }
         format.json { render :show, status: :created, location: @lesson }
       else
