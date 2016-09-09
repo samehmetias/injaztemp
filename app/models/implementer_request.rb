@@ -50,7 +50,7 @@ class ImplementerRequest < ActiveRecord::Base
     end
   end
 
-  def remindUser(message,u_id,d)
+  def remindUser(message,u_id,di)
     apn = ApnHelper::Apn.new
     id = u_id
     u = Phone.where(user_id: id).first
@@ -61,7 +61,7 @@ class ImplementerRequest < ActiveRecord::Base
       puts '++++++++++remindUser+++++++++++++'
       # apn.delay(:priority => 1).sendAlert(token, "INJAZ Egypt",message,"",true)
       if(!(self.status=='NO'))
-        apn.delay(:priority => 1, :run_at => (d - 1.days  - 2.hours), :queue => self.id.to_s).sendAlert(token, "INJAZ Egypt",message,"",true)
+        apn.delay(:priority => 1, :run_at => di - 1.days  - 2.hours, :queue => self.id.to_s).sendAlert(token, "INJAZ Egypt",message,"",true)
       end
       # render :text => '1'
     end
