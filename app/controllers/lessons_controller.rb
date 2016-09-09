@@ -52,6 +52,7 @@ class LessonsController < ApplicationController
   def update
     respond_to do |format|
       if @lesson.update(lesson_params)
+        notifyUser(@lesson.name+' at '+@lesson.implementer_request.school.name+' has been modified. Please check the new updates',@implementer_request.user_id)
         format.html { redirect_to @lesson, notice: 'Lesson was successfully updated.' }
         format.json { render :show, status: :ok, location: @lesson }
       else
