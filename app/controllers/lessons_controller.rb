@@ -68,8 +68,9 @@ class LessonsController < ApplicationController
   # DELETE /lessons/1
   # DELETE /lessons/1.json
   def destroy
-    #Delayed::Job.find(@lesson.id).delete
+    id = @lesson.id
     @lesson.destroy
+    Delayed::Job.find(id).delete
     respond_to do |format|
       format.html { redirect_to lessons_url, notice: 'Lesson was successfully destroyed.' }
       format.json { head :no_content }
