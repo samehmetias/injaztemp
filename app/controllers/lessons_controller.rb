@@ -70,7 +70,7 @@ class LessonsController < ApplicationController
   def destroy
     id = @lesson.id
     @lesson.destroy
-    job = Delayed::Job.find(id)
+    job = Delayed::Job.find(id.to_s)
     puts '%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%'
     puts job.inspect
     respond_to do |format|
