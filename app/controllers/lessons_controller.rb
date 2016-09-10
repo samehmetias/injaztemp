@@ -53,6 +53,9 @@ class LessonsController < ApplicationController
     respond_to do |format|
       if @lesson.update(lesson_params)
         notifyUser(@lesson.name+' at '+@lesson.implementer_request.school.name+' has been modified. Please check the new updates',@lesson.implementer_request.user_id)
+        if(Delayed::Job.find(@lesson.id).delete)
+          remindUser("You have a session tomorrow!",@lesson.implementer_request.user_id,@lesson.date)
+        end
         format.html { redirect_to @lesson, notice: 'Lesson was successfully updated.' }
         format.json { render :show, status: :ok, location: @lesson }
       else
@@ -65,6 +68,7 @@ class LessonsController < ApplicationController
   # DELETE /lessons/1
   # DELETE /lessons/1.json
   def destroy
+    Delayed::Job.find(@lesson.id).delete
     @lesson.destroy
     respond_to do |format|
       format.html { redirect_to lessons_url, notice: 'Lesson was successfully destroyed.' }
@@ -82,6 +86,23 @@ class LessonsController < ApplicationController
         puts token
       puts '++++++++++NotifyUser+++++++++++++'
       apn.delay(:priority => 1).sendAlert(token, "INJAZ Egypt",message,"",true)
+      # render :text => '1'
+    end
+  end
+
+  def remindUser(message,u_id,di)
+    apn = ApnHelper::Apn.new
+    id = u_id
+    u = Phone.where(user_id: id).first
+    if (!(u.nil?))
+      token = u.token
+      puts '++++++++++remindUser+++++++++++++'
+        puts token
+      puts '++++++++++remindUser+++++++++++++'
+      # apn.delay(:priority => 1).sendAlert(token, "INJAZ Egypt",message,"",true)
+      if(!(self.status=='NO'))
+        apn.delay(:priority => 1, :run_at => di - 1.days  , :queue => self.id.to_s).sendAlert(token, "INJAZ Egypt",message,"",true)
+      end
       # render :text => '1'
     end
   end 
