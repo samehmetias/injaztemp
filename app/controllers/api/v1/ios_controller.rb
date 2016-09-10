@@ -267,7 +267,8 @@ module Api
                 lesson = Lesson.where(id: params[:sid]).first
 
                 if((lesson.date.to_date-Time.now.to_date)>2)
-                    render :status=>200, :json=>{:success=>"0", :message=>"Please respond 2 days before session date", :url=>"respond_to_request", :response => response}
+                    render :status=>200, :json=>{:success=>"0", :message=>"Please respond 2 days before session date"}
+                    return
                 end
 
                 if(response == '0')
