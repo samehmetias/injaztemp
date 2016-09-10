@@ -24,7 +24,7 @@
         <td><%= lesson.status %></td>
         <td><%= link_to 'Show', lesson %></td>
         <td><%= link_to 'Edit', edit_lesson_path(lesson) %></td>
-        <td><%= link_to 'Delete', lessons, :style => "color:red" ,method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Delete', lesson, :style => "color:red" ,method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
