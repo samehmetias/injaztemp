@@ -84,7 +84,7 @@ class LessonsController < ApplicationController
       apn.delay(:priority => 1).sendAlert(token, "INJAZ Egypt",message,"",true)
       # render :text => '1'
     end
-  end
+  end 
 
   def accept
     @imp = set_lesson
