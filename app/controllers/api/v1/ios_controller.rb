@@ -276,7 +276,7 @@ module Api
                 else
                     lesson.accept
                 end
-                render :status=>200, :json=>{:success=>"1", :message=>"Success", :url=>"respond_to_request", :response => response}
+                render :status=>200, :json=>{:success=>"1", :message=>"Success", :url=>"respond_to_session", :response => response}
             end
 
             def about_injaz
