@@ -70,9 +70,9 @@ class LessonsController < ApplicationController
   def destroy
     id = @lesson.id
     @lesson.destroy
-    job = Delayed::Job.find(id.to_s)
-    puts '%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%'
-    puts job.inspect
+    # job = Delayed::Job.find(id.to_s)
+    # puts '%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%'
+    # puts job.inspect
     respond_to do |format|
       format.html { redirect_to lessons_url, notice: 'Lesson was successfully destroyed.' }
       format.json { head :no_content }
