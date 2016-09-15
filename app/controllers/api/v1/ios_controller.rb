@@ -44,7 +44,7 @@ module Api
             end
 
             def android_update
-                render :status=>200, :json=>{:success=>"1", :message=>"Success", :url=>"android_update", :version_code=>"2", :must_update=>"false"}
+                render :status=>200, :json=>{:success=>"1", :message=>"Success", :url=>"android_update", :version_code=>"1", :must_update=>"true"}
             end
 
             def login
