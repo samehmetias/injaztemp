@@ -83,8 +83,8 @@
 <%end%>
 <% if @implementer_request.status == 'pending' %>
 
-    <%= button_to 'Accept', accept_implementer_request_path(@implementer_request), method: :patch , {class: 'btn btn-success'}%>
-    <%= button_to 'Reject', refuse_implementer_request_path(@implementer_request), method: :patch , {class: 'btn btn-danger'}%>
+    <%= button_to 'Accept', accept_implementer_request_path(@implementer_request), method: :patch , class: 'btn btn-success'%>
+    <%= button_to 'Reject', refuse_implementer_request_path(@implementer_request), method: :patch , class: 'btn btn-danger'%>
 <% end %>
 
 <%= link_to 'Edit', edit_implementer_request_path(@implementer_request) %> |
