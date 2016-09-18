@@ -27,7 +27,14 @@ Rails.application.routes.draw do
   end
 
   resources :employees
-  resources :companies
+
+  resources :companies do
+    member do
+      get :companyrequest
+      get :createrequests
+    end
+  end
+
   resources :programs
   resources :schools
 

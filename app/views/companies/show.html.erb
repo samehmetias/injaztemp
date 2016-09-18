@@ -2,6 +2,8 @@
 
 <%= button_to "Edit", edit_company_path, :class => "btn btn-primary", :style => "float: right; margin-bottom: 20px; margin-right: 10px", :method => :get%>
 
+<%= button_to "Send Requests", companyrequest_company_path, :class => "btn btn-primary", :style => "float: right; margin-bottom: 20px; margin-right: 10px", :method => :get%>
+
 <h2><%=@company.name%></h2>
 
 <h4 style="margin-top:30px">Employees</h4>

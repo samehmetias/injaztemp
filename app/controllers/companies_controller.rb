@@ -1,6 +1,6 @@
 class CompaniesController < ApplicationController
 
-  before_action :set_company, only: [:show, :edit, :update, :destroy]
+  before_action :set_company, only: [:show, :edit, :update, :destroy, :companyrequest]
   before_filter :authenticate_user!
   before_filter :verify_is_admin , except: [:index,:show]
 
@@ -67,6 +67,28 @@ class CompaniesController < ApplicationController
       format.html { redirect_to companies_url, notice: 'Company was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+
+  def companyrequest
+    @employees = User.where(company_id: @company.id)
+  end
+
+  def createrequests
+    @emp = User.find(params[:user_ids])
+    info = params[:implementer_request]
+    @emp.each do |e|
+      t = ImplementerRequest.new
+      t.program_id = info[:program_id]
+      t.start_date = DateTime.new info["start_date(1i)"].to_i, info["start_date(2i)"].to_i, info["start_date(3i)"].to_i, info["start_date(4i)"].to_i, info["start_date(5i)"].to_i 
+      t.start_time = DateTime.new info["start_time(1i)"].to_i, info["start_time(2i)"].to_i, info["start_time(3i)"].to_i, info["start_time(4i)"].to_i, info["start_time(5i)"].to_i 
+      t.end_time = DateTime.new info["end_time(1i)"].to_i, info["end_time(2i)"].to_i, info["end_time(3i)"].to_i, info["end_time(4i)"].to_i, info["end_time(5i)"].to_i 
+      t.school_id = info[:school_id]
+      puts '++++++++++++++USER++++++++++++++++'
+      puts e.inspect
+      t.user_id = e.id
+      t.save
+    end
+    redirect_to companies_url    
   end
 
   private
