@@ -1,0 +1,21 @@
+<h1>Users</h1>
+
+
+<%= simple_form_for ImplementerRequest.new, :url => createrequests_company_path ,:method => 'get' do |f| %>
+  <%= f.association :program, :include_blank => 'Select Program' , required: true%>
+  <%= f.input :start_date, required: true%>
+  <%= f.input :start_time, required: true%>
+  <%= f.input :end_time, required: true%>
+  <table>
+  <tbody>
+    <% @employees.each do |employee| %>
+      <tr>
+        <td><%= check_box_tag "user_ids[]", employee.id %></td>
+        <td><%= employee.name %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+  <%= f.association :school, :include_blank => 'Select School', required: true%>
+  <%= f.button :submit , 'Send Implementation Details'%>
+<% end %>
