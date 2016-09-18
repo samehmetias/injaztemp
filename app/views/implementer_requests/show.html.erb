@@ -46,7 +46,7 @@
   <%= @implementer_request.program.name %>
 </p>
 
-
+<% if @coor_imp.count > 1 %>
 <table class="table table-hover">
   <thead>
     <tr>
@@ -80,10 +80,11 @@
   </tbody>
 </table>
 
+<%end%>
 <% if @implementer_request.status == 'pending' %>
 
-    <%= button_to 'Accept', accept_implementer_request_path(@implementer_request), method: :patch %>
-    <%= button_to 'Reject', refuse_implementer_request_path(@implementer_request), method: :patch %>
+    <%= button_to 'Accept', accept_implementer_request_path(@implementer_request), method: :patch , {class: 'btn btn-success'}%>
+    <%= button_to 'Reject', refuse_implementer_request_path(@implementer_request), method: :patch , {class: 'btn btn-danger'}%>
 <% end %>
 
 <%= link_to 'Edit', edit_implementer_request_path(@implementer_request) %> |
