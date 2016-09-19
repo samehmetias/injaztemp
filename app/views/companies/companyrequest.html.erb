@@ -1,4 +1,4 @@
-<h1><%@company.name%>'s Requests</h1>
+<h1><%=@company.name%>'s Requests</h1>
 
 
 <%= simple_form_for ImplementerRequest.new, :url => createrequests_company_path ,:method => 'get' do |f| %>
