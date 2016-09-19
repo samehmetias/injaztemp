@@ -174,14 +174,17 @@ module Api
                     e['request_school_address'] = r.school.address
                     
                     coords_requests = r.getCoordinators
-                    e['request_coor_num'] = coords_requests.count.to_s
                     i = 0
                     if (!(coords_requests.nil?))
+                      e['request_coor_num'] = coords_requests.count.to_s
                       while i < coords_requests.count do
                         e['request_coord_name'] = coords_requests[i].user.name
                         e['request_coord_telephone'] = coords_requests[i].user.telephone.to_s
                         i = i+1
                      end  
+                    else
+                        e['request_coor_num'] = '0'
+
                     end
                     
                     requestsArray.push(e)
