@@ -1,4 +1,4 @@
-<h1>Users</h1>
+<h1><%@company.name%>'s Requests</h1>
 
 
 <%= simple_form_for ImplementerRequest.new, :url => createrequests_company_path ,:method => 'get' do |f| %>
@@ -6,6 +6,7 @@
   <%= f.input :start_date, required: true%>
   <%= f.input :start_time, required: true%>
   <%= f.input :end_time, required: true%>
+  <h2>Select Employees</h2>
   <table>
   <tbody>
     <% @employees.each do |employee| %>
