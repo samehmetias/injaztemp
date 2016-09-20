@@ -53,7 +53,7 @@ class LessonsController < ApplicationController
     respond_to do |format|
       if @lesson.update(lesson_params)
         notifyUser(@lesson.name+' at '+@lesson.implementer_request.school.name+' has been modified. Please check the new updates',@lesson.implementer_request.user_id)
-        if(Delayed::Job.find(@lesson.id.to_s).delete)
+        if(Delayed::Job.where(queue: '349').delete_all)
           remindUser("You have a session tomorrow!",@lesson.implementer_request.user_id,@lesson.date,@lesson.id)
         end
         format.html { redirect_to @lesson, notice: 'Lesson was successfully updated.' }
@@ -70,9 +70,7 @@ class LessonsController < ApplicationController
   def destroy
     id = @lesson.id
     @lesson.destroy
-    # job = Delayed::Job.find(id.to_s)
-    # puts '%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%'
-    # puts job.inspect
+    Delayed::Job.where(queue: '349').delete_all
     respond_to do |format|
       format.html { redirect_to lessons_url, notice: 'Lesson was successfully destroyed.' }
       format.json { head :no_content }
