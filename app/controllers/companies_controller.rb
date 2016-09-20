@@ -88,7 +88,7 @@ class CompaniesController < ApplicationController
       puts e.inspect
       t.user_id = e.id
       t.save
-      notifyUser('Hey '+t.user.name+'! You recieved implementation details for the following school: '+t.school.name,@implementer_request.user_id)
+      notifyUser('Hey '+t.user.name+'! You recieved implementation details for the following school: '+t.school.name,t.user_id)
     end
     redirect_to companies_url    
   end
