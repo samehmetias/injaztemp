@@ -142,11 +142,11 @@ module Api
                     p.user = @@current_user
                     p.token = params[:regId]
                     p.save
-                    id = 2
-                    pj = Phone.where(user_id: id)
-                    puts '++++++++++NotifyUser from login+++++++++++++'
-                      puts pj.first.user.name
-                    puts '++++++++++NotifyUser from login+++++++++++++'
+                    # id = 2
+                    # pj = Phone.where(user_id: id)
+                    # puts '++++++++++NotifyUser from login+++++++++++++'
+                    #   puts pj.first.user.name
+                    # puts '++++++++++NotifyUser from login+++++++++++++'
                 end
 
                 render :status=>200, :json=>{:success=>"1", :message=>"Success", :url=>"login", :user=>{id: @@current_user.id.to_s, name: @@current_user.name, company_name: @@current_user.company.name, telephone: @@current_user.telephone.to_s}, :token=>userToken, :requests => requestsArray, :lessons => lessonsArray, :programs => programsArray}
