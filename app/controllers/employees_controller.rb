@@ -13,6 +13,7 @@ class EmployeesController < ApplicationController
   # GET /employees/1.json
   def show
     @imp = ImplementerRequest.where(user_id: @employee.id)
+    @lessons = @employee.lessons
   end
 
   # GET /employees/new

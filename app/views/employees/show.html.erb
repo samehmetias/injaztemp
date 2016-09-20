@@ -20,7 +20,7 @@
   <%= @employee.email %>
 </p>
 
-<p>
+<!-- <p>
   <strong>Area residence:</strong>
   <%= @employee.area_residence %>
 </p>
@@ -49,7 +49,7 @@
 <p>
   <strong>Appraisal grade:</strong>
   <%= @employee.appraisal_grade %>
-</p>
+</p> -->
 
 <p>
   <strong>Employee type:</strong>
@@ -63,7 +63,7 @@
   <%end%>
 </p>
 
-
+<h2>Implementation Details</h2>
 <% if !@imp.nil? && @imp.count > 0%> 
 <table class="table table-hover">
   <thead>
@@ -96,5 +96,38 @@
 <% else %>
 <p> No requests yet <p>
 <% end %>
+
+<h2>Sessions</h2>
+<% if !@lessons.nil? && @lessons.count > 0%> 
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th>User's name</th>
+        <th>Program</th>
+        <th>Name</th>
+        <th>Date</th>
+        <th>Status</th>
+        <th colspan="3"></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @lessons.each do |lesson| %>
+          <td><%= lesson.implementer_request.user.name %></td>
+          <td><%= lesson.implementer_request.program.name %></td>
+          <td><%= lesson.name %></td>
+          <td><%= lesson.date %></td>
+          <td><%= lesson.status %></td>
+          <td><%= link_to 'Show', lesson %></td>
+          <td><%= link_to 'Edit', edit_lesson_path(lesson) %></td>
+          <td><%= link_to 'Delete', lesson, :style => "color:red" ,method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% else %>
+<p> No sessions yet <p>
+<% end %>
+
 <%= link_to 'Edit', edit_employee_path(@employee) %> |
 <%= link_to 'Back', employees_path %>
