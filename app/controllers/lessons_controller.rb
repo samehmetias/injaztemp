@@ -70,7 +70,7 @@ class LessonsController < ApplicationController
   def destroy
     id = @lesson.id
     @lesson.destroy
-    Delayed::Job.where(queue: @lesson.id.to_s).delete_all
+    Delayed::Job.where(queue: id.to_s).delete_all
     respond_to do |format|
       format.html { redirect_to lessons_url, notice: 'Lesson was successfully destroyed.' }
       format.json { head :no_content }
