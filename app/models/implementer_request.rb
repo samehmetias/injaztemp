@@ -35,6 +35,10 @@ class ImplementerRequest < ActiveRecord::Base
     self.save
     u_id = User.where(admin: true).first.id
     notifyUser(self.user.name+' working at '+self.user.company.name+' rejected '+self.school.name+ ' on '+self.start_date.strftime('%A, %d.%m.%y'),u_id)
+    focalpoints = User.where(employee_type: 'Focal Point').where(company_id: self.implementer_request.user.company.id)
+    focalpoints.each do |e|
+      notifyUser(self.user.name+' working at '+self.user.company.name+' rejected '+self.school.name+ ' on '+self.start_date.strftime('%A, %d.%m.%y'),u_id)
+    end
   end
   def notifyUser(message,u_id)
     apn = ApnHelper::Apn.new

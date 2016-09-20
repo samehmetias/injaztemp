@@ -9,9 +9,13 @@ end
   
   def refuse
     self.status = 'NO'
-	self.save
-	u_id = User.where(admin: true).first.id
+  	self.save
+  	u_id = User.where(admin: true).first.id
     notifyUser(self.implementer_request.user.name+' working at '+self.implementer_request.user.company.name+' rejected '+self.name+' at '+self.implementer_request.school.name+ ' on '+self.date.strftime('%A, %d.%m.%y'),u_id)
+    focalpoints = User.where(employee_type: 'Focal Point').where(company_id: self.implementer_request.user.company.id)
+    focalpoints.each do |e|
+      notifyUser(self.implementer_request.user.name+' working at '+self.implementer_request.user.company.name+' rejected '+self.name+' at '+self.implementer_request.school.name+ ' on '+self.date.strftime('%A, %d.%m.%y'),e.id)
+    end
   end
   def notifyUser(message,u_id)
     apn = ApnHelper::Apn.new
