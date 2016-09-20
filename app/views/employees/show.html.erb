@@ -5,10 +5,10 @@
   <%= @employee.name %>
 </p>
 
-<p>
+<!-- <p>
   <strong>Employee type:</strong>
   <%= image_tag @employee.image.url(:thumb) %>
-</p>
+</p> -->
 
 <p>
   <strong>Telephone:</strong>
@@ -70,6 +70,8 @@
     <tr>
       <th>Classroom</th>
       <th>Start date</th>
+      <th>Start Time</th>
+      <th>End Time</th>
       <th>Duration</th>
       <th>Status</th>
       <th>School</th>
@@ -83,8 +85,10 @@
     <% @imp.each do |implementer_request| %>
       <tr>
         <td><%= implementer_request.classroom %></td>
-        <td><%= implementer_request.start_date %></td>
-        <td><%= implementer_request.duration %></td>
+        <td><%= implementer_request.start_date.strftime('%a, %d.%m.%y') %></td>
+        <td><%= implementer_request.start_time.strftime("%H:%M") %></td>
+        <td><%= implementer_request.end_time.strftime("%H:%M") %></td>
+        <td><%= implementer_request.program.duration %></td>
         <td><%= implementer_request.status %></td>
         <td><%= implementer_request.school.name %></td>
         <td><%= implementer_request.user.name %></td>
@@ -106,6 +110,8 @@
         <th>Program</th>
         <th>Name</th>
         <th>Date</th>
+        <th>Start Time</th>
+        <th>End Time</th>
         <th>Status</th>
         <th colspan="3"></th>
       </tr>
@@ -116,7 +122,9 @@
           <td><%= lesson.implementer_request.user.name %></td>
           <td><%= lesson.implementer_request.program.name %></td>
           <td><%= lesson.name %></td>
-          <td><%= lesson.date %></td>
+          <td><%= lesson.date.strftime('%a, %d.%m.%y') %></td>
+          <td><%= lesson.start_time.strftime("%H:%M") %></td>
+          <td><%= lesson.end_time.strftime("%H:%M") %></td>
           <td><%= lesson.status %></td>
           <td><%= link_to 'Show', lesson %></td>
           <td><%= link_to 'Edit', edit_lesson_path(lesson) %></td>
