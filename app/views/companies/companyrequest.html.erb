@@ -17,6 +17,19 @@
     <% end %>
   </tbody>
 </table>
+
+<h2>Select Coordinators</h2>
+  <table>
+  <tbody>
+    <% @coordinator.each do |employee| %>
+      <tr>
+        <td><%= check_box_tag "user_ids[]", employee.id %></td>
+        <td><%= employee.name %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
   <%= f.association :school, :include_blank => 'Select School', required: true%>
   <%= f.button :submit , 'Send Implementation Details'%>
 <% end %>

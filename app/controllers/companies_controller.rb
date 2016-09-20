@@ -71,6 +71,7 @@ class CompaniesController < ApplicationController
 
   def companyrequest
     @employees = User.where(company_id: @company.id)
+    @coordinator = User.where(employee_type: 'Coordinator')
   end
 
   def createrequests
@@ -87,9 +88,24 @@ class CompaniesController < ApplicationController
       puts e.inspect
       t.user_id = e.id
       t.save
+      notifyUser('Hey '+t.user.name+'! You recieved implementation details for the following school: '+t.school.name,@implementer_request.user_id)
     end
     redirect_to companies_url    
   end
+
+  def notifyUser(message,u_id)
+      apn = ApnHelper::Apn.new
+      id = u_id
+      u = Phone.where(user_id: id).first
+      if (!(u.nil?))
+        token = u.token
+        # puts '++++++++++NotifyUser+++++++++++++'
+        #   puts token
+        # puts '++++++++++NotifyUser+++++++++++++'
+        apn.delay(:priority => 1).sendAlert(token, "INJAZ Egypt",message,"",true)
+        # render :text => '1'
+      end
+    end
 
   private
     # Use callbacks to share common setup or constraints between actions.
