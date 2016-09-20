@@ -82,6 +82,9 @@ class ImplementerRequestsController < ApplicationController
     if  !current_user.admin?
       redirect_to implementer_requests_path
     else
+      @implementer_request.lessons.each do |l|
+        Delayed::Job.where(queue: l.id.to_s).delete_all
+      end
       @implementer_request.destroy
       respond_to do |format|
         format.html { redirect_to implementer_requests_url, notice: 'Implementer request was successfully destroyed.' }
