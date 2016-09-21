@@ -3,15 +3,15 @@
 
 <%= simple_form_for @employee, :url => url_for(:action => 'create', :controller => 'employees') do |f| %>
   <%= f.input :name %>
-  <%= f.input :image, :as => :file %>
+  <!-- <%= f.input :image, :as => :file %> -->
   <%= f.input :telephone %>
   <%= f.input :email %>
   <%= f.input :password %>
-  <%= f.input :work_type %>
-  <%= f.input :service_area %>
-  <%= f.input :coordination_skills %>
-  <%= f.input :implementation_skills %>
-  <%= f.input :appraisal_grade %>
+  <!-- <%= f.input :work_type %> -->
+  <!-- <%= f.input :service_area %> -->
+  <!-- <%= f.input :coordination_skills %> -->
+  <!-- <%= f.input :implementation_skills %> -->
+  <!-- <%= f.input :appraisal_grade %> -->
   <%= f.input :employee_type, collection: User::EMPLOYEE_TYPES %>
   <%= f.association :company %>
 
