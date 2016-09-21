@@ -24,14 +24,15 @@
 	<table class="table table-hover">
 	  <thead>
 	    <tr>
+	      <th>Employee</th>
+	      <th>Program</th>
+	      <th></th>
 	      <th>Start Date</th>
 	      <th>Start Time</th>
 	      <th>End Time</th>
 	      <th>Duration</th>
 	      <th>Status</th>
 	      <th>School</th>
-	      <th>Employee</th>
-	      <th>Program</th>
 	      <th colspan="3"></th>
 	    </tr>
 	  </thead>
@@ -39,15 +40,15 @@
 	  <tbody>
 	    <% @req.each do |implementer_request| %>
 	      <tr>
-	        
+	        <td><%= implementer_request.user.name %></td>
+	        <td><%= implementer_request.program.name %></td>
+	        <td><%= button_to 'Show', implementer_request %></td>
 	        <td><%= implementer_request.start_date.strftime('%a, %d.%m.%y') %></td>
 	        <td><%= implementer_request.start_time.strftime("%H:%M") %></td>
 	        <td><%= implementer_request.end_time.strftime("%H:%M") %></td>
 	        <td><%= implementer_request.program.duration %></td>
 	        <td><%= implementer_request.status %></td>
 	        <td><%= implementer_request.school.name %></td>
-	        <td><%= implementer_request.user.name %></td>
-	        <td><%= implementer_request.program.name %></td>
 	        <td><%= link_to 'Show', implementer_request %></td>
 	        <td><%= link_to 'Edit', edit_implementer_request_path(implementer_request) %></td>
 	        <td><%= link_to 'Delete', implementer_request, :style => "color:red" ,method: :delete, data: { confirm: 'Are you sure?' } %></td>
