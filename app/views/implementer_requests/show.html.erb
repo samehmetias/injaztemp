@@ -1,9 +1,9 @@
 <p id="notice"><%= notice %></p>
-
+<!-- 
 <p>
   <strong>Classroom:</strong>
   <%= @implementer_request.classroom %>
-</p>
+</p> -->
 
 <p>
   <strong>Start date:</strong>
@@ -12,17 +12,17 @@
 
 <p>
   <strong>Start Time:</strong>
-  <%= @implementer_request.start_time %>
+  <%= @implementer_request.start_time.strftime("%H:%M") %>
 </p>
 
 <p>
   <strong>End Time:</strong>
-  <%= @implementer_request.end_time %>
+  <%= @implementer_request.end_time.strftime("%H:%M") %>
 </p>
 
 <p>
   <strong>Duration:</strong>
-  <%= @implementer_request.duration %>
+  <%= @implementer_request.program.duration %>
 </p>
 
 <p>
@@ -50,7 +50,6 @@
 <table class="table table-hover">
   <thead>
     <tr>
-      <th>Classroom</th>
       <th>Start date</th>
       <th>Duration</th>
       <th>Status</th>
@@ -66,7 +65,6 @@
     <% @coor_imp.each do |implementer_request| %>
       <tr>
         <%if implementer_request.user.id != @implementer_request.user.id %>
-        <td><%= implementer_request.classroom %></td>
         <td><%= implementer_request.start_date %></td>
         <td><%= implementer_request.duration %></td>
         <td><%= implementer_request.status %></td>
