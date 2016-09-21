@@ -2,18 +2,18 @@
 
 
 <%= simple_form_for @employee, :url => url_for(:action => 'create', :controller => 'employees') do |f| %>
-  <%= f.input :name %>
+  <%= f.input :name, required: true %>
   <!-- <%= f.input :image, :as => :file %> -->
-  <%= f.input :telephone %>
-  <%= f.input :email %>
-  <%= f.input :password %>
+  <%= f.input :telephone, required: true%>
+  <%= f.input :email, required: true %>
+  <%= f.input :password, required: true %>
   <!-- <%= f.input :work_type %> -->
   <!-- <%= f.input :service_area %> -->
   <!-- <%= f.input :coordination_skills %> -->
   <!-- <%= f.input :implementation_skills %> -->
   <!-- <%= f.input :appraisal_grade %> -->
-  <%= f.input :employee_type, collection: User::EMPLOYEE_TYPES %>
-  <%= f.association :company %>
+  <%= f.input :employee_type, collection: User::EMPLOYEE_TYPES, required: true%>
+  <%= f.association :company,required: true%>
 
   <%= f.button :submit %>
 <% end %>
