@@ -1,4 +1,21 @@
+<h1>Implementation Details</h1>
 <p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Employee:</strong>
+  <%= @implementer_request.user.name %>
+</p>
+
+<p>
+  <strong>Company:</strong>
+  <%= @implementer_request.user.company.name %>
+</p>
+
+
+<p>
+  <strong>Program:</strong>
+  <%= @implementer_request.program.name %>
+</p>
 <!-- 
 <p>
   <strong>Classroom:</strong>
@@ -7,7 +24,7 @@
 
 <p>
   <strong>Start date:</strong>
-  <%= @implementer_request.start_date %>
+  <%= @implementer_request.start_date.strftime('%a, %d.%m.%y') %>
 </p>
 
 <p>
@@ -35,17 +52,7 @@
   <%= @implementer_request.school.name %>
 </p>
 
-<p>
-  <strong>User:</strong>
-  <%= @implementer_request.user.name %>
-</p>
-
-
-<p>
-  <strong>Program:</strong>
-  <%= @implementer_request.program.name %>
-</p>
-
+<h2> Coordinators Information </h2>
 <% if @coor_imp.count > 1 %>
 <table class="table table-hover">
   <thead>
@@ -77,8 +84,46 @@
     <% end %>
   </tbody>
 </table>
-
+<% else %>
+<p> No coordinators assigned yet </p>
 <%end%>
+
+<h2>Sessions</h2>
+<% if @sessions.count > 1 %>
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th>User's name</th>
+      <th>Program</th>
+      <th>Name</th>
+      <th>Date</th>
+      <th>Start Time</th>
+      <th>End Time</th>
+      <th>Status</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @sessions.each do |lesson| %>
+        <td><%= lesson.implementer_request.user.name %></td>
+        <td><%= lesson.implementer_request.program.name %></td>
+        <td><%= lesson.name %></td>
+        <td><%= lesson.date.strftime('%a, %d.%m.%y') %></td>
+        <td><%= lesson.start_time.strftime("%H:%M") %></td>
+        <td><%= lesson.end_time.strftime("%H:%M")%></td>
+        <td><%= lesson.status %></td>
+        <td><%= link_to 'Show', lesson %></td>
+        <td><%= link_to 'Edit', edit_lesson_path(lesson) %></td>
+        <td><%= link_to 'Delete', lesson, :style => "color:red" ,method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<% else %>
+<p> No sessions yet </p>
+<%end%>
+
 <% if @implementer_request.status == 'pending' %>
 
     <%= button_to 'Accept', accept_implementer_request_path(@implementer_request), method: :patch , class: 'btn btn-success'%>

@@ -42,7 +42,10 @@
 	      <tr>
 	        <td><%= implementer_request.user.name %></td>
 	        <td><%= implementer_request.program.name %></td>
-	        <td><%= button_to 'Show', implementer_request %></td>
+    		<td><%= form_tag '/implementer_requests/'+implementer_request.id.to_s+"/postpone" , method: :patch do -%>
+				<%= text_field_tag 'num',"0", type: "number"%>
+				<%= submit_tag 'Postpone' , class: 'btn btn-warning'%>
+			<% end -%></td>
 	        <td><%= implementer_request.start_date.strftime('%a, %d.%m.%y') %></td>
 	        <td><%= implementer_request.start_time.strftime("%H:%M") %></td>
 	        <td><%= implementer_request.end_time.strftime("%H:%M") %></td>

@@ -17,6 +17,7 @@ Rails.application.routes.draw do
       patch :accept
       patch :refuse
       post :notifyUser
+      patch :postpone
     end
   end
 

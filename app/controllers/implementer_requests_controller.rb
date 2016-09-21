@@ -24,10 +24,7 @@ class ImplementerRequestsController < ApplicationController
     # @e = User.joins(@coor_imp).where()
     
    @coor_imp = ImplementerRequest.includes(:user).where(school: s, program: p, start_date: d,:users => {employee_type: 'Coordinator' } ).all
-   # @coor_imp = ImplementerRequest.where('School = ? and Program = ? and start_data = ?', s,p,d)
-    # @coor_imp.each do |company|
-    #  puts company.User.name
-    # end
+   @sessions = @implementer_request.lessons
   end
 
   # GET /implementer_requests/new
@@ -91,6 +88,11 @@ class ImplementerRequestsController < ApplicationController
         format.json { head :no_content }
       end
     end
+  end
+
+  def postpone
+    set_implementer_request.postpone Integer(params[:num])
+    redirect_to :back
   end
   
   def accept

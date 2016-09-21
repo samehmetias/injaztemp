@@ -19,7 +19,7 @@ class ImplementerRequest < ActiveRecord::Base
     @s = self.program.duration
     while @i < @s do
       @l = Lesson.new ()
-      @l.date = @d + (@i*2).minutes
+      @l.date = @d + (@i*7).days
       @l.name = 'Session '+(@i+1).to_s
       @l.start_time = st
       @l.end_time = et
@@ -51,6 +51,22 @@ class ImplementerRequest < ActiveRecord::Base
       puts '++++++++++NotifyUser+++++++++++++'
       apn.delay(:priority => 1).sendAlert(token, "INJAZ Egypt",message,"",true)
       # render :text => '1'
+    end
+  end
+
+  def postpone n
+    lessons = self.lessons
+    change = false
+    lessons.each do |l|
+      if (Time.now.to_date < l.date.to_date)
+        l.date = l.date+(7*n).days
+        l.status = 'pending'
+        l.save
+        change = true
+      end
+    end
+    if change
+      notifyUser('Your session dates have been updated! Please review them',self.user_id)
     end
   end
 
