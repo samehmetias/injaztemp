@@ -22,9 +22,10 @@ class ImplementerRequestsController < ApplicationController
 
     #@coor_imp = ImplementerRequest.where(school_id = s.id)
     # @e = User.joins(@coor_imp).where()
-    
-   @coor_imp = ImplementerRequest.includes(:user).where(school: s, program: p, start_date: d,:users => {employee_type: 'Coordinator' } ).all
+   e = ImplementerRequest.joins(:user)
    @sessions = @implementer_request.lessons
+   # @coor_imp = e.where(school: s, program: p, start_date: d).all
+   @coor_imp = @implementer_request.getCoordinators
   end
 
   # GET /implementer_requests/new

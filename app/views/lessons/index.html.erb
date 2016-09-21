@@ -10,6 +10,8 @@
       <th>Program</th>
       <th>Name</th>
       <th>Date</th>
+      <th>Start Time</th>
+      <th>End Time</th>
       <th>Status</th>
       <th colspan="3"></th>
     </tr>
@@ -20,7 +22,9 @@
         <td><%= lesson.implementer_request.user.name %></td>
         <td><%= lesson.implementer_request.program.name %></td>
         <td><%= lesson.name %></td>
-        <td><%= lesson.date %></td>
+        <td><%= lesson.date.strftime('%a, %d.%m.%y')  %></td>
+        <td><%= lesson.start_time.strftime("%H:%M") %></td>
+        <td><%= lesson.end_time.strftime("%H:%M") %></td>
         <td><%= lesson.status %></td>
         <td><%= link_to 'Show', lesson %></td>
         <td><%= link_to 'Edit', edit_lesson_path(lesson) %></td>
