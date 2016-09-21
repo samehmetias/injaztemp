@@ -63,7 +63,7 @@
       <th>School</th>
       <th>Coordinator Name</th>
       <th>Program</th>
-      <th>Telephon</th>
+      <th>Telephone</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -72,7 +72,7 @@
     <% @coor_imp.each do |implementer_request| %>
       <tr>
         <%if implementer_request.user.id != @implementer_request.user.id %>
-        <td><%= implementer_request.start_date %></td>
+        <td><%= implementer_request.start_date.strftime('%a, %d.%m.%y') %></td>
         <td><%= implementer_request.duration %></td>
         <td><%= implementer_request.status %></td>
         <td><%= implementer_request.school.name %></td>
