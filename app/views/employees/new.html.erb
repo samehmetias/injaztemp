@@ -12,7 +12,7 @@
   <%= f.input :coordination_skills %>
   <%= f.input :implementation_skills %>
   <%= f.input :appraisal_grade %>
-  <%= f.select(:employee_type, User::EMPLOYEE_TYPES) %>
+  <%= f.input :employee_type, collection: User::EMPLOYEE_TYPES %>
   <%= f.association :company %>
 
   <%= f.button :submit %>
