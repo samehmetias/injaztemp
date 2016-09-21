@@ -24,6 +24,8 @@ class User < ActiveRecord::Base
   has_one :api_key, dependent: :destroy
 
   after_create :create_api_key
+
+  EMPLOYEE_TYPES = ["Volunteer", "Coordinator", "Focal Point", "Trainer", "Executor"]
   def ensure_authentication_token!
     if self.api_key.nil?
       ApiKey.create :user => self

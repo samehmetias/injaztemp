@@ -58,7 +58,7 @@
   </div>
   <div class="field">
     <%= f.label :employee_type %><br>
-    <%= f.text_field :employee_type %>
+    <%= f.select(:employee_type, User::EMPLOYEE_TYPES) %>
   </div>
   <div class="field">
     <%= f.label :company_id %><br>

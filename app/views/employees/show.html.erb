@@ -59,7 +59,7 @@
 <p>
   <strong>Company:</strong>
   <%if @employee.company%>
-    <%= @employee.company.name%>
+    <%= link_to @employee.company.name, company_path(@employee.company) %>
   <%end%>
 </p>
 
@@ -68,7 +68,6 @@
 <table class="table table-hover">
   <thead>
     <tr>
-      <th>Classroom</th>
       <th>Start date</th>
       <th>Start Time</th>
       <th>End Time</th>
@@ -84,7 +83,6 @@
   <tbody>
     <% @imp.each do |implementer_request| %>
       <tr>
-        <td><%= implementer_request.classroom %></td>
         <td><%= implementer_request.start_date.strftime('%a, %d.%m.%y') %></td>
         <td><%= implementer_request.start_time.strftime("%H:%M") %></td>
         <td><%= implementer_request.end_time.strftime("%H:%M") %></td>
