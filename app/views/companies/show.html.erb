@@ -13,13 +13,50 @@
 		<%User.where(company_id: @company.id).each do |u|%>
 			<tr>
 				<td> <%= link_to u.name, employee_path(u) %> </td>
-        <td>
-          <%= link_to 'Edit', edit_employee_path(u) %>
-          <%= link_to 'Delete', employee_path(u), method: :delete, data: { confirm: 'Are you sure?' }, :style => "color:red" %>
-        </td>
+		        <td><%= link_to 'Edit', edit_employee_path(u) %></td>
+		        <td> <%= link_to 'Delete', employee_path(u), method: :delete, data: { confirm: 'Are you sure?' }, :style => "color:red" %></td>
 			</tr>
 		<%end%>
 	</tbody>
 </table>
+<h4 style="margin-top:30px"><%=@company.name%>'s ALL Implementation Details</h4>
+<% if !@req.nil? && @req.count > 0%> 
+	<table class="table table-hover">
+	  <thead>
+	    <tr>
+	      <th>Start Date</th>
+	      <th>Start Time</th>
+	      <th>End Time</th>
+	      <th>Duration</th>
+	      <th>Status</th>
+	      <th>School</th>
+	      <th>Employee</th>
+	      <th>Program</th>
+	      <th colspan="3"></th>
+	    </tr>
+	  </thead>
+
+	  <tbody>
+	    <% @req.each do |implementer_request| %>
+	      <tr>
+	        
+	        <td><%= implementer_request.start_date.strftime('%a, %d.%m.%y') %></td>
+	        <td><%= implementer_request.start_time.strftime("%H:%M") %></td>
+	        <td><%= implementer_request.end_time.strftime("%H:%M") %></td>
+	        <td><%= implementer_request.program.duration %></td>
+	        <td><%= implementer_request.status %></td>
+	        <td><%= implementer_request.school.name %></td>
+	        <td><%= implementer_request.user.name %></td>
+	        <td><%= implementer_request.program.name %></td>
+	        <td><%= link_to 'Show', implementer_request %></td>
+	        <td><%= link_to 'Edit', edit_implementer_request_path(implementer_request) %></td>
+	        <td><%= link_to 'Delete', implementer_request, :style => "color:red" ,method: :delete, data: { confirm: 'Are you sure?' } %></td>
+	      </tr>
+	    <% end %>
+	  </tbody>
+	</table>
+<%else%>
+	<p> No requests yet <p>
+<%end%>
 
 <%= link_to 'Back', companies_path %>
