@@ -96,6 +96,8 @@ class ImplementerRequest < ActiveRecord::Base
     # @e = User.joins(@coor_imp).where()
     if(self.user.employee_type != 'Coordinator')
       coor_imp = ImplementerRequest.includes(:user).where(school: s, program: p, start_date: d,:users => {employee_type: 'Coordinator' } ).all
+    else
+      return []
     end
    # @coor_imp = ImplementerRequest.where('School = ? and Program = ? and start_data = ?', s,p,d)
     # @coor_imp.each do |company|
