@@ -6,8 +6,18 @@
 </p>
 
 <p>
-  <strong>Date:</strong>
-  <%= @lesson.date %>
+  <strong>Start date:</strong>
+  <%= @lesson.date.strftime('%a, %d.%m.%y') %>
+</p>
+
+<p>
+  <strong>Start Time:</strong>
+  <%= @lesson.start_time.strftime("%H:%M") %>
+</p>
+
+<p>
+  <strong>End Time:</strong>
+  <%= @lesson.end_time.strftime("%H:%M") %>
 </p>
 
 <p>
@@ -15,15 +25,15 @@
   <%= @lesson.status %>
 </p>
 
-<p>
+<!-- <p>
   <strong>Implementer request:</strong>
   <%= @lesson.implementer_request %>
 </p>
-
+ -->
 <% if @lesson.status == 'pending' %>
 
-    <%= button_to 'Accept', accept_lesson_path(@lesson), method: :patch, class: 'button success round small' %>
-    <%= button_to 'Reject', refuse_lesson_path(@lesson), method: :patch, class: 'button alert round small' %>
+    <%= button_to 'Accept', accept_lesson_path(@lesson), method: :patch, class: 'btn btn-success' %>
+    <%= button_to 'Reject', refuse_lesson_path(@lesson), method: :patch, class: 'btn btn-danger'%>
 <% end %>
 
 <%= link_to 'Edit', edit_lesson_path(@lesson) %> |
