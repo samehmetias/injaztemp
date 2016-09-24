@@ -237,7 +237,7 @@ module Api
 
             def get_all_sessions
                 lessonsArray = []
-                lessons = @@current_user.lessons.order("date ASC")
+                lessons = @@current_user.lessons.order("created_at, name DESC")
                 lessons.each do |r|
                     e = {}
                     e['lesson_id'] = r.id.to_s
