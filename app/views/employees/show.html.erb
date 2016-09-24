@@ -106,6 +106,7 @@
       <tr>
         <th>User's name</th>
         <th>Program</th>
+        <th>School</th>
         <th>Name</th>
         <th>Date</th>
         <th>Start Time</th>
@@ -119,6 +120,7 @@
       <% @lessons.each do |lesson| %>
           <td><%= lesson.implementer_request.user.name %></td>
           <td><%= lesson.implementer_request.program.name %></td>
+          <td><%= lesson.implementer_request.school.name %></td>
           <td><%= lesson.name %></td>
           <td><%= lesson.date.strftime('%a, %d.%m.%y') %></td>
           <td><%= lesson.start_time.strftime("%H:%M") %></td>

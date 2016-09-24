@@ -13,7 +13,7 @@ class EmployeesController < ApplicationController
   # GET /employees/1.json
   def show
     @imp = ImplementerRequest.where(user_id: @employee.id)
-    @lessons = @employee.lessons
+    @lessons = @employee.lessons.order("date DESC")
   end
 
   # GET /employees/new
