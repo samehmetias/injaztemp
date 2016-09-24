@@ -11,7 +11,7 @@ class CompaniesController < ApplicationController
     if  current_user.admin?
       @companies = Company.all.order(:name).page(params[:page]).per(10)
     else
-      @companies = current_user.Company
+      @companies = current_user.company
     end
   end
 
