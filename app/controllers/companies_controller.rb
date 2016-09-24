@@ -2,7 +2,7 @@ class CompaniesController < ApplicationController
 
   before_action :set_company, only: [:show, :edit, :update, :destroy, :companyrequest]
   before_filter :authenticate_user!
-  before_filter :verify_is_admin , except: [:index,:show]
+  before_filter :verify_is_admin 
 
   
   # GET /companies
