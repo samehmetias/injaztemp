@@ -55,6 +55,11 @@ class ImplementerRequest < ActiveRecord::Base
   end
 
   def postpone n
+    if (Time.now.to_date < self.start_date.to_date)
+      self.start_date = self.start_date+(7*n).days
+      self.status = 'pending'
+      self.save
+    end
     lessons = self.lessons
     change = false
     lessons.each do |l|
