@@ -1,6 +1,7 @@
 <p id="notice"><%= notice %></p>
-
+<% if current_user.admin? %>
 <%= button_to "New Request", new_implementer_request_path, :class => "btn btn-primary", :style => "float: right; margin-top:10px; margin-bottom: 20px", :method => :get%>
+<%end%>
 <h1>Listing Requests</h1>
 
 <table class="table table-hover">
