@@ -356,6 +356,20 @@ module Api
                 @@current_user.valid_password?(params[:password])
                 @@current_user.ensure_authentication_token!
                 userToken = @@current_user.api_key.key.to_s
+
+
+                uuid = params[:device_uuid]
+                phones = Phone.where(uuid: uuid)
+                
+                phones.each do |p|
+                    p.user = @@current_user
+                    p.token = params[:regId]
+                    p.save
+                end
+
+
+
+
                 render :status=>200, :json=>{:success=>"1", :message=>"Success", :url=>"sign_up", :user=>{id: @@current_user.id.to_s, name: @@current_user.name}, :token=>userToken, :email => params[:email], :password => params[:password]}
             end
 
