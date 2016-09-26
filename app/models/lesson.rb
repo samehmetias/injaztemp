@@ -20,14 +20,15 @@ end
   def notifyUser(message,u_id)
     apn = ApnHelper::Apn.new
     id = u_id
-    u = Phone.where(user_id: id).first
-    if (!(u.nil?))
-      token = u.token
-      puts '++++++++++NotifyUser+++++++++++++'
-        puts token
-      puts '++++++++++NotifyUser+++++++++++++'
-      apn.delay(:priority => 1).sendAlert(token, "INJAZ Egypt",message,"",true)
-      # render :text => '1'
+    Phone.where(user_id: id).each do |u|
+      if (!(u.nil?))
+        token = u.token
+        puts '++++++++++NotifyUser+++++++++++++'
+          puts token
+        puts '++++++++++NotifyUser+++++++++++++'
+        apn.delay(:priority => 1).sendAlert(token, "INJAZ Egypt",message,"",true)
+        # render :text => '1'
+      end
     end
   end
 end

@@ -80,31 +80,33 @@ class LessonsController < ApplicationController
   def notifyUser(message,u_id)
     apn = ApnHelper::Apn.new
     id = u_id
-    u = Phone.where(user_id: id).first
-    if (!(u.nil?))
-      token = u.token
-      puts '++++++++++NotifyUser+++++++++++++'
-        puts token
-      puts '++++++++++NotifyUser+++++++++++++'
-      apn.delay(:priority => 1).sendAlert(token, "INJAZ Egypt",message,"",true)
-      # render :text => '1'
+    Phone.where(user_id: id).each do |u|
+      if (!(u.nil?))
+        token = u.token
+        puts '++++++++++NotifyUser+++++++++++++'
+          puts token
+        puts '++++++++++NotifyUser+++++++++++++'
+        apn.delay(:priority => 1).sendAlert(token, "INJAZ Egypt",message,"",true)
+        # render :text => '1'
+      end
     end
   end
 
   def remindUser(message,u_id,di,q)
     apn = ApnHelper::Apn.new
     id = u_id
-    u = Phone.where(user_id: id).first
-    if (!(u.nil?))
-      token = u.token
-      puts '++++++++++remindUser+++++++++++++'
-        puts token
-      puts '++++++++++remindUser+++++++++++++'
-      # apn.delay(:priority => 1).sendAlert(token, "INJAZ Egypt",message,"",true)
-      if(!(self.status=='NO'))
-        apn.delay(:priority => 1, :run_at => di - 1.days  , :queue => q.to_s).sendAlert(token, "INJAZ Egypt",message,"",true)
+    Phone.where(user_id: id).each do |u|
+      if (!(u.nil?))
+        token = u.token
+        puts '++++++++++remindUser+++++++++++++'
+          puts token
+        puts '++++++++++remindUser+++++++++++++'
+        # apn.delay(:priority => 1).sendAlert(token, "INJAZ Egypt",message,"",true)
+        if(!(self.status=='NO'))
+          apn.delay(:priority => 1, :run_at => di - 1.days  , :queue => q.to_s).sendAlert(token, "INJAZ Egypt",message,"",true)
+        end
+        # render :text => '1'
       end
-      # render :text => '1'
     end
   end 
 
